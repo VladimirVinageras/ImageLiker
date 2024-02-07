@@ -11,6 +11,15 @@ class ImagesListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -19,46 +28,61 @@ class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    //    tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
     }
 
+    
 
+}
+
+extension ImagesListViewController {
+    
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        guard let image = UIImage(named: photosName[indexPath.row]) else {return}
+        
+        cell.imageToLike.image = image
+        cell.dateLabel.text = dateFormatter.string(from: Date())
+        
+        let mustBeLiked = indexPath.row % 2 == 0
+        let isLikedButton = mustBeLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
+        cell.likeButton.setImage(isLikedButton, for: .normal)
+    }
 }
 
 //MARK: - DATASOURCE extension
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return photosName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell
-        if let reusedCell = tableView.dequeueReusableCell(withIdentifier: "cell"){
-            cell = reusedCell
-        } else{
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+        guard let imageListCell = cell as? ImagesListCell else {
+            return UITableViewCell()
         }
         
-        cell.textLabel?.text = "Images and hearts here"
-
-        return cell
+        configCell(for: imageListCell, with: indexPath)
+        return imageListCell
     }
-    
-    // Здесь будут наши методы dataSource
 }
 
 //MARK: - DELEGATE extension
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
-            let alert = UIAlertController(title: nil,
-                                          message: "Вы нажали на строчку \(indexPath.row + 1)",
-                                          preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                alert.dismiss(animated: true)
-            }
-            alert.addAction(okAction)
-            present(alert, animated: true)
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let image = UIImage(named: photosName[indexPath.row]) else {
+            return 0
+        }
+        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
+        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
+        let imageWidth = image.size.width
+        let scale = imageViewWidth / imageWidth
+        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
+        return cellHeight
     }
     
     

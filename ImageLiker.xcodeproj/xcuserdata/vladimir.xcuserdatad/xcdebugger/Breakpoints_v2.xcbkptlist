@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "121E5590-7D6F-470D-883B-655C49686F6B"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "894D8F0D-B40E-4295-A009-5C6BBA14EB2A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageLiker/ImageList/ImagesListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5E2D130-589F-460B-B3D3-04B1BC79A3DF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageLiker/ImageList/ImagesListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A5E2D130-589F-460B-B3D3-04B1BC79A3DF - 2b71f8d5fc7df471"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageLiker.ImagesListViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "ImageLiker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Desktop/SWIFT%20DEV/Practicum%20Course%20/ImageLiker/ImageLiker/ImageList/ImagesListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "728">
+               </Location>
+               <Location
+                  uuid = "A5E2D130-589F-460B-B3D3-04B1BC79A3DF - 2b71f8d5fc7df410"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageLiker.ImagesListViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "ImageLiker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Desktop/SWIFT%20DEV/Practicum%20Course%20/ImageLiker/ImageLiker/ImageList/ImagesListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "716">
+               </Location>
+               <Location
+                  uuid = "A5E2D130-589F-460B-B3D3-04B1BC79A3DF - 2b71f8d5fc7df579"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageLiker.ImagesListViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "ImageLiker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Desktop/SWIFT%20DEV/Practicum%20Course%20/ImageLiker/ImageLiker/ImageList/ImagesListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "716">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

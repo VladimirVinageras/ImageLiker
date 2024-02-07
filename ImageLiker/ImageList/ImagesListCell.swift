@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 final class ImagesListCell: UITableViewCell {
-    static let reuseIdentifier = "ImageListCell"
+    static let reuseIdentifier = "ImagesListCell"
     
-    
+    @IBOutlet weak var imageToLike: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
 }
