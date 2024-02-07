@@ -36,6 +36,8 @@ class ImagesListViewController: UIViewController {
 
 }
 
+//MARK: - CELL CONFIGURATION
+
 extension ImagesListViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
