@@ -14,8 +14,6 @@
 		E78855D22B6DCE5200B244BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E78855D12B6DCE5200B244BC /* Assets.xcassets */; };
 		E78855D52B6DCE5200B244BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78855D32B6DCE5200B244BC /* LaunchScreen.storyboard */; };
 		E78855DD2B71A54400B244BC /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78855DC2B71A54400B244BC /* ImagesListCell.swift */; };
-		E78855E12B74494100B244BC /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E78855DF2B74494000B244BC /* YS Display-Medium.ttf */; };
-		E78855E22B74494100B244BC /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E78855E02B74494100B244BC /* YS Display-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +26,6 @@
 		E78855D42B6DCE5200B244BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E78855D62B6DCE5200B244BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E78855DC2B71A54400B244BC /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
-		E78855DF2B74494000B244BC /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
-		E78855E02B74494100B244BC /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +65,6 @@
 				E78855D12B6DCE5200B244BC /* Assets.xcassets */,
 				E78855D32B6DCE5200B244BC /* LaunchScreen.storyboard */,
 				E78855D62B6DCE5200B244BC /* Info.plist */,
-				E78855E32B7449B700B244BC /* Resources */,
 			);
 			path = ImageLiker;
 			sourceTree = "<group>";
@@ -81,15 +76,6 @@
 				E78855CC2B6DCE5100B244BC /* ImagesListViewController.swift */,
 			);
 			path = ImageList;
-			sourceTree = "<group>";
-		};
-		E78855E32B7449B700B244BC /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E78855DF2B74494000B244BC /* YS Display-Medium.ttf */,
-				E78855E02B74494100B244BC /* YS Display-Bold.ttf */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,8 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E78855D52B6DCE5200B244BC /* LaunchScreen.storyboard in Resources */,
-				E78855E12B74494100B244BC /* YS Display-Medium.ttf in Resources */,
-				E78855E22B74494100B244BC /* YS Display-Bold.ttf in Resources */,
 				E78855D22B6DCE5200B244BC /* Assets.xcassets in Resources */,
 				E78855D02B6DCE5100B244BC /* Main.storyboard in Resources */,
 			);
