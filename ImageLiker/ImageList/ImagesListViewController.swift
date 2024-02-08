@@ -29,7 +29,6 @@ class ImagesListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-
     }
 
     
@@ -49,7 +48,12 @@ extension ImagesListViewController {
         let mustBeLiked = indexPath.row % 2 == 0
         let isLikedButton = mustBeLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
         cell.likeButton.setImage(isLikedButton, for: .normal)
+        
+        cell.gradientHandler()
     }
+    
+ 
+    
 }
 
 //MARK: - DATASOURCE extension
