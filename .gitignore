@@ -1,0 +1,71 @@
+<<<<<<< Updated upstream
+# Xcode
+.DS_Store
+*/.DS_Store
+xcuserdata
+
+# Build products
+build/
+DerivedData/
+
+# Temporary files
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode per-user files
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+*.xcuserstate
+
+# Swift Package Manager
+Package.resolved
+
+# CocoaPods
+Pods/
+*.lock
+
+# Personal files
+
+=======
+# Xcode
+.DS_Store
+*/.DS_Store
+xcuserdata
+
+# Build products
+build/
+DerivedData/
+
+# Temporary files
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode per-user files
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+*.xcuserstate
+
+# Swift Package Manager
+Package.resolved
+
+# CocoaPods
+Pods/
+*.lock
+
+# Personal files
+
+>>>>>>> Stashed changes
