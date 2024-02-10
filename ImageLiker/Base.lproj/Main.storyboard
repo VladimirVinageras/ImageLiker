@@ -22,15 +22,15 @@
                                 <color key="backgroundColor" name="YP Black"/>
                                 <color key="sectionIndexBackgroundColor" name="YP Black"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="384" id="HJQ-nk-PaR" customClass="ImagesListCell" customModule="ImageLiker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="384"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="505" id="HJQ-nk-PaR" customClass="ImagesListCell" customModule="ImageLiker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="505"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HJQ-nk-PaR" id="dOo-kq-MgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="384"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="505"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mmg-8c-N3n" userLabel="imageToLike" customClass="El">
-                                                    <rect key="frame" x="16" y="4" width="361" height="376"/>
+                                                    <rect key="frame" x="16" y="4" width="361" height="497"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -41,9 +41,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN9-Q7-VYZ" userLabel="likeButton">
                                                     <rect key="frame" x="347" y="4" width="30" height="34"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <connections>
+                                                        <action selector="toggleLikesUnlikes:" destination="HJQ-nk-PaR" eventType="touchUpInside" id="Gzl-kD-bio"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31 февраля 2025" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDm-eE-6G7" userLabel="dateLabel">
-                                                    <rect key="frame" x="24" y="358" width="152" height="18"/>
+                                                    <rect key="frame" x="24" y="479" width="152" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="46g-BM-ETV"/>
                                                         <constraint firstAttribute="width" constant="152" id="iGy-4A-FdH"/>
@@ -53,16 +56,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xm-r6-cid" userLabel="gradientView">
-                                                    <rect key="frame" x="16" y="354" width="361" height="30"/>
+                                                    <rect key="frame" x="16" y="475" width="361" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Gdc-r9-q66"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IR1-Xf-wsw" userLabel="heartsFallingView">
+                                                    <rect key="frame" x="16" y="4" width="361" height="497"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" name="YP Black"/>
                                             <constraints>
+                                                <constraint firstItem="IR1-Xf-wsw" firstAttribute="top" secondItem="dOo-kq-MgZ" secondAttribute="top" constant="4" id="4Ez-qu-9XD"/>
                                                 <constraint firstItem="0xm-r6-cid" firstAttribute="bottom" secondItem="ZDm-eE-6G7" secondAttribute="bottom" constant="8" id="4hE-RG-g3M"/>
                                                 <constraint firstItem="Mmg-8c-N3n" firstAttribute="leading" secondItem="dOo-kq-MgZ" secondAttribute="leading" constant="16" id="5DU-s8-K8G"/>
+                                                <constraint firstItem="IR1-Xf-wsw" firstAttribute="leading" secondItem="dOo-kq-MgZ" secondAttribute="leading" constant="16" id="8dC-lV-mPP"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mmg-8c-N3n" secondAttribute="trailing" constant="16" id="H2d-qd-6Xf"/>
                                                 <constraint firstItem="Mmg-8c-N3n" firstAttribute="top" secondItem="dOo-kq-MgZ" secondAttribute="top" constant="4" id="L33-iz-l8g"/>
                                                 <constraint firstItem="ZDm-eE-6G7" firstAttribute="leading" secondItem="0xm-r6-cid" secondAttribute="leading" constant="8" id="PAG-U0-e4c"/>
@@ -70,7 +78,9 @@
                                                 <constraint firstItem="XN9-Q7-VYZ" firstAttribute="top" secondItem="Mmg-8c-N3n" secondAttribute="top" id="aG2-qh-La1"/>
                                                 <constraint firstItem="ZDm-eE-6G7" firstAttribute="top" secondItem="0xm-r6-cid" secondAttribute="top" constant="4" id="bQg-7t-l9V"/>
                                                 <constraint firstItem="0xm-r6-cid" firstAttribute="leading" secondItem="dOo-kq-MgZ" secondAttribute="leading" constant="16" id="hsN-a3-AQM"/>
+                                                <constraint firstAttribute="trailing" secondItem="IR1-Xf-wsw" secondAttribute="trailing" constant="16" id="mLq-5F-xHU"/>
                                                 <constraint firstAttribute="bottom" secondItem="Mmg-8c-N3n" secondAttribute="bottom" constant="4" id="q4Y-p1-Unw"/>
+                                                <constraint firstAttribute="bottom" secondItem="IR1-Xf-wsw" secondAttribute="bottom" constant="4" id="rLZ-jU-fr6"/>
                                                 <constraint firstAttribute="bottom" secondItem="0xm-r6-cid" secondAttribute="bottom" id="vOM-gW-hn7"/>
                                                 <constraint firstAttribute="trailing" secondItem="0xm-r6-cid" secondAttribute="trailing" constant="16" id="vum-4D-ffB"/>
                                             </constraints>
@@ -80,6 +90,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="ZDm-eE-6G7" id="jiW-ey-cdH"/>
                                             <outlet property="gradientView" destination="0xm-r6-cid" id="9Jd-5z-80N"/>
+                                            <outlet property="heartsFallingView" destination="IR1-Xf-wsw" id="X57-6u-08L"/>
                                             <outlet property="imageToLike" destination="Mmg-8c-N3n" id="OKt-DY-IT4"/>
                                             <outlet property="likeButton" destination="XN9-Q7-VYZ" id="v8B-qH-bFx"/>
                                         </connections>
@@ -106,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="123" y="-58"/>
+            <point key="canvasLocation" x="122.90076335877862" y="-58.450704225352112"/>
         </scene>
     </scenes>
     <resources>

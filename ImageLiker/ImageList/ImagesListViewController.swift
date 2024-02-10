@@ -44,11 +44,7 @@ extension ImagesListViewController {
         
         cell.imageToLike.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
-        
-        let mustBeLiked = indexPath.row % 2 == 0
-        let isLikedButton = mustBeLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
-        cell.likeButton.setImage(isLikedButton, for: .normal)
-        
+        cell.toggleButtonImage()
         cell.gradientHandler()
     }
     
@@ -67,7 +63,6 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
@@ -77,6 +72,17 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! ImagesListCell
+       
+        cell.isSnowingHearts.toggle()
+        if cell.isSnowingHearts {
+            cell.likeButton.setImage(UIImage(named: "Active"),for: .normal)
+            cell.fallingHearts()
+
+        } else{
+            cell.likeButton.setImage(UIImage(named: "NoActive"), for: .normal)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
