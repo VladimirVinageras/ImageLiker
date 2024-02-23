@@ -14,6 +14,8 @@
 		E78855D22B6DCE5200B244BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E78855D12B6DCE5200B244BC /* Assets.xcassets */; };
 		E78855D52B6DCE5200B244BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78855D32B6DCE5200B244BC /* LaunchScreen.storyboard */; };
 		E78855DD2B71A54400B244BC /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78855DC2B71A54400B244BC /* ImagesListCell.swift */; };
+		E788D2222B80388E00B7A335 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E788D2212B80388E00B7A335 /* ProfileViewController.swift */; };
+		E7B1C4722B86BE4D00D37669 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B1C4712B86BE4D00D37669 /* SingleImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		E78855D42B6DCE5200B244BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E78855D62B6DCE5200B244BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E78855DC2B71A54400B244BC /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		E788D2212B80388E00B7A335 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E7B1C4712B86BE4D00D37669 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 			children = (
 				E78855DC2B71A54400B244BC /* ImagesListCell.swift */,
 				E78855CC2B6DCE5100B244BC /* ImagesListViewController.swift */,
+				E788D2212B80388E00B7A335 /* ProfileViewController.swift */,
+				E7B1C4712B86BE4D00D37669 /* SingleImageViewController.swift */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -151,7 +157,9 @@
 			files = (
 				E78855CD2B6DCE5100B244BC /* ImagesListViewController.swift in Sources */,
 				E78855DD2B71A54400B244BC /* ImagesListCell.swift in Sources */,
+				E788D2222B80388E00B7A335 /* ProfileViewController.swift in Sources */,
 				E78855C92B6DCE5100B244BC /* AppDelegate.swift in Sources */,
+				E7B1C4722B86BE4D00D37669 /* SingleImageViewController.swift in Sources */,
 				E78855CB2B6DCE5100B244BC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
