@@ -35,7 +35,6 @@ class ProfileViewController: UIViewController {
         profileImage = UIImage(named: "profile")
         imageView = UIImageView(image: profileImage)
         guard let imageView = imageView else {return}
-     //   imageView.tintColor = .gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
     }
@@ -75,7 +74,7 @@ class ProfileViewController: UIViewController {
             action: #selector(Self.didTapButton)
         )
         guard let logOutButton = logOutButton else {return}
-        logOutButton.tintColor = .red
+        logOutButton.tintColor = .ypRed
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logOutButton)
     }
@@ -84,7 +83,7 @@ class ProfileViewController: UIViewController {
         guard let imageView = imageView else {return}
         guard let button = logOutButton else {return}
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             imageView.widthAnchor.constraint(equalToConstant: 70),
             imageView.heightAnchor.constraint(equalToConstant: 70),
