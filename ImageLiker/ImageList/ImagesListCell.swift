@@ -23,8 +23,7 @@ final class ImagesListCell: UITableViewCell {
         let caGradientLayer = CAGradientLayer()
         caGradientLayer.frame = gradientView.bounds
         
-      //  caGradientLayer.colors = [(UIColor.ypBlack).withAlphaComponent(0).cgColor, (UIColor.ypBlack).withAlphaComponent(0.2).cgColor]
-      
+        
         caGradientLayer.colors = [(UIColor.ypBlack).withAlphaComponent(0).cgColor, (UIColor.ypBlack).withAlphaComponent(0.2).cgColor]
       
         
