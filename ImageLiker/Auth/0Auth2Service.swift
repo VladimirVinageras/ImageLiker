@@ -40,7 +40,7 @@ final class OAuth2Service {
         }
         
         
-        let task = URLSession.shared.dataTask(with: tokenRequest) { result in
+        let task = URLSession.shared.dataTask(with: tokenRequest) { [weak self] result in
             switch result {
             case .success(let (data, response)):
                 guard (200..<300).contains(response.statusCode) else {
