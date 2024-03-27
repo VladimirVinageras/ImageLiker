@@ -12,7 +12,8 @@ final class AuthViewController : UIViewController{
     
     private let segueShowWebViewIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
-
+    private let oauth2Service = OAuth2Service.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackButton()
@@ -35,9 +36,9 @@ final class AuthViewController : UIViewController{
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .ypBlack
-    
+        
     }
-
+    
     @objc func backButtonTapped(){
         dismiss(animated: true, completion: nil)
     }
@@ -45,10 +46,23 @@ final class AuthViewController : UIViewController{
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        delegate?.authViewController(self, didAuthenticateWithCode: code)
+        
+        vc.dismiss(animated: true)
+        oauth2Service.fetchOAuthToken(using: code){ [weak self] result in
+            guard let delegate = self?.delegate, let viewController = self  else {return}
+                delegate.didAuthenticate(viewController)
+            
+            switch result {
+            case .success(let token):
+                print("✅✅✅✅✅✅✅Received token: ", token)
+                
+            case .failure(let error):
+                print("❌❌❌❌❌❌Failed to retrieve token:", error)
+            }
+        }
     }
-
-    @objc func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
     }
 }

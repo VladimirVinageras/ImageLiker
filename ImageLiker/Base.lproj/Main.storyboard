@@ -13,7 +13,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="z7n-50-FTr">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="P0q-SL-Y2B" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P0q-SL-Y2B" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jdH-ZW-IdS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -180,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="173" y="233"/>
+            <point key="canvasLocation" x="192" y="-62"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Lea-Y7-nqx">

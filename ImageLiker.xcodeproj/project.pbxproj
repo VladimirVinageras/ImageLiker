@@ -13,7 +13,6 @@
 		E77A37372BA632ED00E3FFCC /* WebViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A37362BA632ED00E3FFCC /* WebViewControllerDelegate.swift */; };
 		E77A37392BAB403D00E3FFCC /* 0Auth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A37382BAB403D00E3FFCC /* 0Auth2Service.swift */; };
 		E77A373B2BAB8B2C00E3FFCC /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A373A2BAB8B2C00E3FFCC /* URLSession+data.swift */; };
-		E77A373D2BADC3FB00E3FFCC /* TemporalFile .swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A373C2BADC3FB00E3FFCC /* TemporalFile .swift */; };
 		E77A373F2BAF7D2200E3FFCC /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A373E2BAF7D2200E3FFCC /* OAuthTokenResponseBody.swift */; };
 		E77A37412BAF82A000E3FFCC /* 0Auth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A37402BAF82A000E3FFCC /* 0Auth2TokenStorage.swift */; };
 		E78855C92B6DCE5100B244BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78855C82B6DCE5100B244BC /* AppDelegate.swift */; };
@@ -36,7 +35,6 @@
 		E77A37362BA632ED00E3FFCC /* WebViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerDelegate.swift; sourceTree = "<group>"; };
 		E77A37382BAB403D00E3FFCC /* 0Auth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 0Auth2Service.swift; sourceTree = "<group>"; };
 		E77A373A2BAB8B2C00E3FFCC /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
-		E77A373C2BADC3FB00E3FFCC /* TemporalFile .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TemporalFile .swift"; sourceTree = "<group>"; };
 		E77A373E2BAF7D2200E3FFCC /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		E77A37402BAF82A000E3FFCC /* 0Auth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 0Auth2TokenStorage.swift; sourceTree = "<group>"; };
 		E78855C52B6DCE5100B244BC /* ImageLiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageLiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +80,6 @@
 		E78855BC2B6DCE5100B244BC = {
 			isa = PBXGroup;
 			children = (
-				E77A373C2BADC3FB00E3FFCC /* TemporalFile .swift */,
 				E78855C72B6DCE5100B244BC /* ImageLiker */,
 				E78855C62B6DCE5100B244BC /* Products */,
 			);
@@ -99,7 +96,11 @@
 		E78855C72B6DCE5100B244BC /* ImageLiker */ = {
 			isa = PBXGroup;
 			children = (
-				E7D8B2E62BB3508E007AC2FC /* System&Storyboard */,
+				E78855C82B6DCE5100B244BC /* AppDelegate.swift */,
+				E78855CA2B6DCE5100B244BC /* SceneDelegate.swift */,
+				E78855D32B6DCE5200B244BC /* LaunchScreen.storyboard */,
+				E78855CE2B6DCE5100B244BC /* Main.storyboard */,
+				E78855D12B6DCE5200B244BC /* Assets.xcassets */,
 				E7D8B2E52BB35071007AC2FC /* Splash */,
 				E7D8B2E42BB35034007AC2FC /* Constants */,
 				E7D8B2E32BB35022007AC2FC /* Helpers */,
@@ -151,18 +152,6 @@
 				E7D8B2E02BB34FE3007AC2FC /* SplashViewController.swift */,
 			);
 			path = Splash;
-			sourceTree = "<group>";
-		};
-		E7D8B2E62BB3508E007AC2FC /* System&Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				E78855C82B6DCE5100B244BC /* AppDelegate.swift */,
-				E78855CA2B6DCE5100B244BC /* SceneDelegate.swift */,
-				E78855D32B6DCE5200B244BC /* LaunchScreen.storyboard */,
-				E78855CE2B6DCE5100B244BC /* Main.storyboard */,
-				E78855D12B6DCE5200B244BC /* Assets.xcassets */,
-			);
-			path = "System&Storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,7 +240,6 @@
 				E77A37352BA4EF9C00E3FFCC /* WebViewViewController.swift in Sources */,
 				E78855CB2B6DCE5100B244BC /* SceneDelegate.swift in Sources */,
 				E77A37412BAF82A000E3FFCC /* 0Auth2TokenStorage.swift in Sources */,
-				E77A373D2BADC3FB00E3FFCC /* TemporalFile .swift in Sources */,
 				E7D8B2E12BB34FE3007AC2FC /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
