@@ -34,38 +34,6 @@
             endingLineNumber = "75"
             landmarkName = "rescaleAndCenterImageInScrollView(image:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "14505EFA-1FAD-43E6-9011-C2219F7D3B27 - 2f8ae0e98fb0e626"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ImageLiker.SingleImageViewController.rescaleAndCenterImageInScrollView(image: __C.UIImage) -&gt; ()"
-                  moduleName = "ImageLiker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Desktop/ImageLiker/ImageLiker/ImageList/SingleImageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "140">
-               </Location>
-               <Location
-                  uuid = "14505EFA-1FAD-43E6-9011-C2219F7D3B27 - 2f8ae0e98fb0e7e0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ImageLiker.SingleImageViewController.rescaleAndCenterImageInScrollView(image: __C.UIImage) -&gt; ()"
-                  moduleName = "ImageLiker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Desktop/ImageLiker/ImageLiker/ImageList/SingleImageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "316">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -82,38 +50,6 @@
             endingLineNumber = "39"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "99DD7EC9-97EE-48FA-93DE-16FB4729082F - b07c6b199d0485b0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ImageLiker.SingleImageViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "ImageLiker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Desktop/ImageLiker/ImageLiker/ImageList/SingleImageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "1740">
-               </Location>
-               <Location
-                  uuid = "99DD7EC9-97EE-48FA-93DE-16FB4729082F - b07c6b199d0485f2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ImageLiker.SingleImageViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "ImageLiker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vladimir/Desktop/ImageLiker/ImageLiker/ImageList/SingleImageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "1528">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
