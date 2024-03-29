@@ -13,8 +13,10 @@ final class OAuth2Service {
     private init() {}
     
     func createTokenRequest(using code: String) -> URLRequest? {
-        guard let url = Constants.baseURL else {return nil}
-        guard var urlComponents = URLComponents(url: url , resolvingAgainstBaseURL: false) else { return nil }
+        guard var urlBase = Constants.baseURL else {return nil}
+        var urlAuthToken = urlBase.description + Constants.oAuthTokenPath
+        
+        guard var urlComponents = URLComponents(string: urlAuthToken) else { return nil }
         
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value:  Constants.accesKey),
@@ -39,19 +41,14 @@ final class OAuth2Service {
             return
         }
         
-        
-        let task = URLSession.shared.dataTask(with: tokenRequest) { [weak self] result in
+        let task = URLSession.shared.data(for: tokenRequest) { result in
             switch result {
-            case .success(let (data, response)):
-                guard (200..<300).contains(response.statusCode) else {
-                    completion(.failure(NSError(domain: "OAuth2Service", code: response.statusCode, userInfo: nil)))
-                    return
-                }
-                
+            case .success(let data):
                 do {
                     let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                    OAuth2TokenStorage.shared.token = tokenResponse.accessToken
-                    completion(.success(tokenResponse.accessToken))
+                    
+                    guard let accessToken = tokenResponse.accessToken else {return}
+                    completion(.success(accessToken))
                 } catch {
                     completion(.failure(error))
                 }
@@ -61,5 +58,4 @@ final class OAuth2Service {
         }
         task.resume()
     }
-    
 }

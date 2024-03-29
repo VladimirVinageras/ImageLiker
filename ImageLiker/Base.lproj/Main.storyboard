@@ -50,11 +50,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="yt6-Yv-F7Z"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Войти">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
-                                    <color key="baseForegroundColor" name="YP Black"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Войти">
+                                    <color key="titleColor" name="YP Black"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="16"/>
@@ -326,9 +326,9 @@
                         <constraints>
                             <constraint firstItem="LDr-gk-zRk" firstAttribute="leading" secondItem="Eyh-Nt-vgI" secondAttribute="leading" id="QJ0-59-hbQ"/>
                             <constraint firstItem="LDr-gk-zRk" firstAttribute="top" secondItem="Eyh-Nt-vgI" secondAttribute="top" id="QlU-Vu-jwq"/>
-                            <constraint firstItem="4fR-iU-Fpb" firstAttribute="trailing" secondItem="qVZ-OR-nFS" secondAttribute="trailing" id="SdZ-eI-Mp6"/>
+                            <constraint firstAttribute="trailing" secondItem="4fR-iU-Fpb" secondAttribute="trailing" id="SdZ-eI-Mp6"/>
                             <constraint firstItem="4fR-iU-Fpb" firstAttribute="leading" secondItem="qVZ-OR-nFS" secondAttribute="leading" id="TP8-ib-1Mp"/>
-                            <constraint firstItem="LDr-gk-zRk" firstAttribute="trailing" secondItem="Eyh-Nt-vgI" secondAttribute="trailing" id="afp-RH-hX2"/>
+                            <constraint firstItem="Eyh-Nt-vgI" firstAttribute="trailing" secondItem="LDr-gk-zRk" secondAttribute="trailing" id="afp-RH-hX2"/>
                             <constraint firstItem="4fR-iU-Fpb" firstAttribute="top" secondItem="Eyh-Nt-vgI" secondAttribute="top" id="dJC-xC-tnW"/>
                             <constraint firstAttribute="bottom" secondItem="4fR-iU-Fpb" secondAttribute="bottom" id="imI-Ey-SYy"/>
                         </constraints>

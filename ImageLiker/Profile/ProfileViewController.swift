@@ -97,17 +97,10 @@ class ProfileViewController: UIViewController {
             button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
     }
-    
-    
     @objc
     private func didTapButton(){
-      print("I'll miss you 🥺")
+        print("I'll miss you 🥺")
     }
-    
-    
-    
-    
-    
 }
 
 

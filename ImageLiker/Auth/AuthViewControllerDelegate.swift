@@ -11,5 +11,4 @@ import UIKit
 
 protocol AuthViewControllerDelegate: AnyObject {
     func didAuthenticate(_ vc: AuthViewController)
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
 }

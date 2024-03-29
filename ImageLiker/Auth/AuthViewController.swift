@@ -13,6 +13,7 @@ final class AuthViewController : UIViewController{
     private let segueShowWebViewIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
     private let oauth2Service = OAuth2Service.shared
+    private let storage = OAuth2TokenStorage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,26 +39,25 @@ final class AuthViewController : UIViewController{
         navigationItem.backBarButtonItem?.tintColor = .ypBlack
         
     }
-    
-    @objc func backButtonTapped(){
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        navigationController?.popViewController(animated: true)
         
-        vc.dismiss(animated: true)
         oauth2Service.fetchOAuthToken(using: code){ [weak self] result in
-            guard let delegate = self?.delegate, let viewController = self  else {return}
-                delegate.didAuthenticate(viewController)
-            
+            guard let viewController = self  else {return}
+                
             switch result {
             case .success(let token):
+                viewController.storage.token = token
+                viewController.delegate?.didAuthenticate(viewController)
+               
                 print("✅✅✅✅✅✅✅Received token: ", token)
                 
             case .failure(let error):
                 print("❌❌❌❌❌❌Failed to retrieve token:", error)
+                break
             }
         }
     }
