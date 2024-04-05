@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 final class AuthViewController : UIViewController{
     
@@ -19,6 +20,10 @@ final class AuthViewController : UIViewController{
         super.viewDidLoad()
         configureBackButton()
         
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,9 +50,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         navigationController?.popViewController(animated: true)
         
+        UIBlockingProgressHUD.show()
         oauth2Service.fetchOAuthToken(using: code){ [weak self] result in
             guard let viewController = self  else {return}
                 
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let token):
                 viewController.storage.token = token
@@ -56,10 +63,17 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 print("✅✅✅✅✅✅✅Received token: ", token)
                 
             case .failure(let error):
+                self?.prepareAlert()
                 print("❌❌❌❌❌❌Failed to retrieve token:", error)
                 break
             }
         }
+    }
+    
+    private func prepareAlert(){
+        let alert = UIAlertController(title: "Authorization Error", message: "Unable to login. Try again later", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.present(self, animated: true)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

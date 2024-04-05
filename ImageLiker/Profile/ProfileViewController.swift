@@ -7,14 +7,19 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
-    var userNameLabel = UILabel()
-    var userLoginLabel = UILabel()
-    var messageLabel = UILabel()
-    var profileImage : UIImage?
-    var imageView : UIImageView?
-    var logOutButton : UIButton?
+    private var userNameLabel = UILabel()
+    private var userLoginLabel = UILabel()
+    private var messageLabel = UILabel()
+    private var profileImage : UIImage?
+    private var imageView : UIImageView?
+    private var logOutButton : UIButton?
+    
+    private let profileServiceShared = ProfileService.shared
+    private var oauth2tokenStorageShared = OAuth2TokenStorage.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -29,6 +34,39 @@ class ProfileViewController: UIViewController {
         createMessageLabel(message: "Hello, IOS15!")
         activateConstraints()
         
+        guard let profileData = profileServiceShared.profileData else {return}
+        updateProfileData(with: profileData)
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
+    }
+            
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.profileImage,
+            let url = URL(string: profileImageURL)
+        else { return }
+        updatingProfileImage(for: url)
+    }
+
+    private func updatingProfileImage(for url: URL){
+        guard let imageView = imageView else {return}
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 50)
+        
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholder.jpeg"),
+            options: [.processor(processor)])
     }
     
     private func createUserProfileImageView(systemNameImage : String){
@@ -39,6 +77,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(imageView)
     }
     
+
     private func createUserNameLabel(userName: String){
         userNameLabel.text = userName
         userNameLabel.textColor = .ypWhite
@@ -102,5 +141,17 @@ class ProfileViewController: UIViewController {
         print("I'll miss you 🥺")
     }
 }
+
+
+extension ProfileViewController {
+    
+private func updateProfileData(with profileData: Profile){
+        
+        userNameLabel.text = profileData.name
+        userLoginLabel.text = profileData.loginName
+        messageLabel.text = profileData.biography
+    }
+}
+
 
 
