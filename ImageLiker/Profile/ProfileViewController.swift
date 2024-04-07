@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     private var userNameLabel = UILabel()
     private var userLoginLabel = UILabel()
     private var messageLabel = UILabel()
@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .ypBlack
         createUserProfileImageView(systemNameImage: "person.crop.circle.fill")
         createLogoutButton(buttonImageSystemName: "ipad.and.arrow.forward")
         createUserNameLabel(userName: "Ekaterina Vinakheras")
@@ -42,11 +42,9 @@ class ProfileViewController: UIViewController {
                 forName: ProfileImageService.didChangeNotification,
                 object: nil,
                 queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
-        updateAvatar()
+            ) { _ in}
+        
+        self.updateAvatar()
     }
             
     private func updateAvatar() {
@@ -59,7 +57,7 @@ class ProfileViewController: UIViewController {
 
     private func updatingProfileImage(for url: URL){
         guard let imageView = imageView else {return}
-        
+        imageView.backgroundColor = .ypBlack
         let processor = RoundCornerImageProcessor(cornerRadius: 50)
         
         imageView.kf.indicatorType = .activity
@@ -67,6 +65,7 @@ class ProfileViewController: UIViewController {
             with: url,
             placeholder: UIImage(named: "placeholder.jpeg"),
             options: [.processor(processor)])
+       
     }
     
     private func createUserProfileImageView(systemNameImage : String){

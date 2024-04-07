@@ -22,10 +22,6 @@ final class AuthViewController : UIViewController{
         
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueShowWebViewIdentifier {
             guard
@@ -64,17 +60,10 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 print("✅✅✅✅✅✅✅Received token: ", token)
                 
             case .failure(let error):
-                self?.prepareAlert()
                 print("❌❌❌❌❌❌Failed to retrieve token:", error)
                 break
             }
         }
-    }
-    
-    private func prepareAlert(){
-        let alert = UIAlertController(title: "Authorization Error", message: "Unable to login. Try again later", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        alert.present(self, animated: true)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

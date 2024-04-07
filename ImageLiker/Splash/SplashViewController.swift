@@ -38,7 +38,7 @@ final class SplashViewController : UIViewController {
     }
     
     private func createSplashView(){
-
+        
         imageView.image = UIImage(named: "Vector")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -48,19 +48,19 @@ final class SplashViewController : UIViewController {
             imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
         
-      
+        
     }
     
     private func configAuthViewController(){
+        
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController")
-        
-        guard let authViewController = viewController as? AuthViewController else { return }
-
-        authViewController.delegate = self
-        authViewController.modalPresentationStyle = .fullScreen
-        
-        present(authViewController, animated: true, completion: nil)
+        let navigationViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewNavigationController") as? UINavigationController
+        guard let navigationViewController else {return}
+        navigationViewController.modalPresentationStyle = .fullScreen
+        let authViewController = navigationViewController.viewControllers[0] as? AuthViewController
+        authViewController?.delegate = self
+        present (navigationViewController, animated: true)
+    
     }
     
     
@@ -97,9 +97,6 @@ final class SplashViewController : UIViewController {
         }
         
     }
-    
-    
-    
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
@@ -108,7 +105,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self , let token = storage.token  else { return }
             self.fetchProfile(using: token)
         }
-        
     }
 }
 

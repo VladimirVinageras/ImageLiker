@@ -9,26 +9,27 @@ import Foundation
 import UIKit
 
 struct Profile : Codable {
- 
+    
     var loginName : String {
-       return "@\(username)"
+        return "@\(username)"
     }
     
     var name : String {
-            guard let first_name = first_name,
-                  let last_name = last_name
-            else {
-                return "Unknown name"
-            }
-            
-            return first_name + " " + last_name
-    }
-    var biography : String {
-        guard let bio = self.bio else {return "No information available"}
-    return bio
+        var firstName = ""
+        var lastName = ""
+        
+        if let first_Name = first_name {firstName = first_Name} else {firstName = ""}
+        if let last_Name = last_name {  lastName = last_Name} else {lastName = ""}
+        
+        return firstName + " " + lastName
     }
     
-   //MARK: - Data from REQUEST Struct Result
+    var biography : String {
+        guard let bio = self.bio else {return "No information available"}
+        return bio
+    }
+    
+    //MARK: - Data from REQUEST Struct Result
     var username : String
     var first_name : String?
     var last_name : String?
