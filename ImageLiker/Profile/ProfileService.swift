@@ -19,12 +19,9 @@ final class ProfileService{
     private(set) var profileData : Profile?
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
-    
     private var bearerTokenRequest: (String) -> String = { input in
         return "Bearer \(input)"
     }
-    
-    
     
     private func createProfileRequest(authorizationToken: String) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
@@ -38,11 +35,10 @@ final class ProfileService{
             return nil
         }
         var profileRequest = URLRequest(url: url)
-        
         profileRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
+        profileRequest.httpMethod = "GET"
         return profileRequest
     }
-    
     
     func fetchProfile(using authorizationToken: String, completion: @escaping (Result<Profile, Error>) -> Void){
         task?.cancel()

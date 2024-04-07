@@ -12,8 +12,6 @@ import ProgressHUD
 
 final class SplashViewController : UIViewController {
     private let imageView = UIImageView()
-    
-    private let showAuthenticationScreenSegueIdentifier = "ShowAuthScreen"
     private let oauth2Service = OAuth2Service.shared
     private let storage = OAuth2TokenStorage()
     private let profileServiceShared = ProfileService.shared
@@ -55,7 +53,7 @@ final class SplashViewController : UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let navigationViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewNavigationController") as? UINavigationController
-        guard let navigationViewController else {return}
+        guard let navigationViewController else { return }
         navigationViewController.modalPresentationStyle = .fullScreen
         let authViewController = navigationViewController.viewControllers[0] as? AuthViewController
         authViewController?.delegate = self

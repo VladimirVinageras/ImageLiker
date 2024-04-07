@@ -25,16 +25,16 @@ final class WebViewViewController : UIViewController{
         loadAuthView()
     }
 }
-    extension WebViewViewController{
+
+extension WebViewViewController{
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
             updateProgress()
         }
         
-        
         private func loadAuthView(){
-            guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {return}
+            guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else { return }
             
             urlComponents.queryItems = [
                 URLQueryItem(name: "client_id", value: Constants.accesKey),
@@ -42,7 +42,7 @@ final class WebViewViewController : UIViewController{
                 URLQueryItem(name: "response_type", value: "code"),
                 URLQueryItem(name: "scope", value: Constants.accessScope)
             ]
-            guard let url = urlComponents.url else {return}
+            guard let url = urlComponents.url else { return }
             let request = URLRequest(url: url)
             webView.load(request)
         }

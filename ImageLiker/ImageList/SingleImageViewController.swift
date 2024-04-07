@@ -55,6 +55,7 @@ final class SingleImageViewController: UIViewController {
 //MARK: - EXTENSIONS
 
 extension SingleImageViewController: UIScrollViewDelegate {
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         imageView
     }
@@ -91,6 +92,7 @@ extension SingleImageViewController {
 }
 
 extension SingleImageViewController {
+    
     private func shareImage(){
         guard let image = imageView.image else {
                    return

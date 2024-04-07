@@ -24,6 +24,7 @@ final class ProfileViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypBlack
@@ -42,7 +43,9 @@ final class ProfileViewController: UIViewController {
                 forName: ProfileImageService.didChangeNotification,
                 object: nil,
                 queue: .main
-            ) { _ in}
+            ) { [weak self] _ in
+                self?.updateAvatar()
+            }
         
         self.updateAvatar()
     }
@@ -57,7 +60,7 @@ final class ProfileViewController: UIViewController {
 
     private func updatingProfileImage(for url: URL){
         guard let imageView = imageView else {return}
-        imageView.backgroundColor = .ypBlack
+        
         let processor = RoundCornerImageProcessor(cornerRadius: 50)
         
         imageView.kf.indicatorType = .activity
@@ -65,7 +68,7 @@ final class ProfileViewController: UIViewController {
             with: url,
             placeholder: UIImage(named: "placeholder.jpeg"),
             options: [.processor(processor)])
-       
+        imageView.backgroundColor = .ypBlack
     }
     
     private func createUserProfileImageView(systemNameImage : String){
@@ -76,7 +79,6 @@ final class ProfileViewController: UIViewController {
         view.addSubview(imageView)
     }
     
-
     private func createUserNameLabel(userName: String){
         userNameLabel.text = userName
         userNameLabel.textColor = .ypWhite
@@ -86,6 +88,7 @@ final class ProfileViewController: UIViewController {
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(userNameLabel)
     }
+    
     private func createUserLoginLabel(userLogin: String){
         userLoginLabel.text = userLogin
      
@@ -135,6 +138,7 @@ final class ProfileViewController: UIViewController {
             button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
     }
+    
     @objc
     private func didTapButton(){
         print("I'll miss you 🥺")

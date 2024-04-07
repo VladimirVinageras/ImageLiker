@@ -39,8 +39,8 @@ final class ProfileImageService{
         }
         
         var profileImageURLRequest = URLRequest(url: url)
-        
         profileImageURLRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
+        profileImageURLRequest.httpMethod = "GET"
         return profileImageURLRequest
     }
     
@@ -57,12 +57,12 @@ final class ProfileImageService{
         let task = urlSession.objectTask(for: profileImageURLRequest) { (result: Result<ProfileImageResult, Error>) in
             switch result {
             case .success(let profileImageResult):
-               
+                
                 if let profileImage = profileImageResult.profileImage {
-                    guard let profileImageURL = profileImage.large else {return}
+                    guard let profileImageURL = profileImage.large else { return }
                     self.profileImage = profileImageURL
                     completion(.success(profileImageURL))
-                    NotificationCenter.default                                     
+                    NotificationCenter.default
                         .post(
                             name: ProfileImageService.didChangeNotification,
                             object: self,
