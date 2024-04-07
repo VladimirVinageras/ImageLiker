@@ -60,7 +60,7 @@ final class ProfileViewController: UIViewController {
 
     private func updatingProfileImage(for url: URL){
         guard let imageView = imageView else {return}
-        
+        imageView.backgroundColor = .ypBlack
         let processor = RoundCornerImageProcessor(cornerRadius: 50)
         
         imageView.kf.indicatorType = .activity
@@ -68,7 +68,7 @@ final class ProfileViewController: UIViewController {
             with: url,
             placeholder: UIImage(named: "placeholder.jpeg"),
             options: [.processor(processor)])
-        imageView.backgroundColor = .ypBlack
+        
     }
     
     private func createUserProfileImageView(systemNameImage : String){

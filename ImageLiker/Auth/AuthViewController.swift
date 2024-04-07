@@ -16,6 +16,10 @@ final class AuthViewController : UIViewController{
     private let oauth2Service = OAuth2Service.shared
     private let storage = OAuth2TokenStorage()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackButton()
