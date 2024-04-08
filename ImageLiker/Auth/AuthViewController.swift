@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 final class AuthViewController : UIViewController{
     
@@ -14,6 +15,10 @@ final class AuthViewController : UIViewController{
     weak var delegate: AuthViewControllerDelegate?
     private let oauth2Service = OAuth2Service.shared
     private let storage = OAuth2TokenStorage()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +32,7 @@ final class AuthViewController : UIViewController{
                 let webViewViewController = segue.destination as? WebViewViewController
             else { fatalError("Failed to prepare for \(segueShowWebViewIdentifier)") }
             webViewViewController.delegate = self
+            webViewViewController.modalPresentationStyle = .fullScreen
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -45,9 +51,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         navigationController?.popViewController(animated: true)
         
+        UIBlockingProgressHUD.show()
         oauth2Service.fetchOAuthToken(using: code){ [weak self] result in
-            guard let viewController = self  else {return}
+            guard let viewController = self  else { return }
                 
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let token):
                 viewController.storage.token = token

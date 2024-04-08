@@ -7,27 +7,67 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
-class ProfileViewController: UIViewController {
-    var userNameLabel = UILabel()
-    var userLoginLabel = UILabel()
-    var messageLabel = UILabel()
-    var profileImage : UIImage?
-    var imageView : UIImageView?
-    var logOutButton : UIButton?
+final class ProfileViewController: UIViewController {
+    private var userNameLabel = UILabel()
+    private var userLoginLabel = UILabel()
+    private var messageLabel = UILabel()
+    private var profileImage : UIImage?
+    private var imageView : UIImageView?
+    private var logOutButton : UIButton?
+    
+    private let profileServiceShared = ProfileService.shared
+    private var oauth2tokenStorageShared = OAuth2TokenStorage.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .ypBlack
         createUserProfileImageView(systemNameImage: "person.crop.circle.fill")
         createLogoutButton(buttonImageSystemName: "ipad.and.arrow.forward")
         createUserNameLabel(userName: "Ekaterina Vinakheras")
         createUserLoginLabel(userLogin: "@ekaterina_vin")
         createMessageLabel(message: "Hello, IOS15!")
         activateConstraints()
+        
+        guard let profileData = profileServiceShared.profileData else {return}
+        updateProfileData(with: profileData)
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                self?.updateAvatar()
+            }
+        
+        self.updateAvatar()
+    }
+            
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.profileImage,
+            let url = URL(string: profileImageURL)
+        else { return }
+        updatingProfileImage(for: url)
+    }
+
+    private func updatingProfileImage(for url: URL){
+        guard let imageView = imageView else {return}
+        imageView.backgroundColor = .ypBlack
+        let processor = RoundCornerImageProcessor(cornerRadius: 50)
+        
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholder.jpeg"),
+            options: [.processor(processor)])
         
     }
     
@@ -48,6 +88,7 @@ class ProfileViewController: UIViewController {
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(userNameLabel)
     }
+    
     private func createUserLoginLabel(userLogin: String){
         userLoginLabel.text = userLogin
      
@@ -97,10 +138,23 @@ class ProfileViewController: UIViewController {
             button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
     }
+    
     @objc
     private func didTapButton(){
         print("I'll miss you 🥺")
     }
 }
+
+
+extension ProfileViewController {
+    
+private func updateProfileData(with profileData: Profile){
+        
+        userNameLabel.text = profileData.name
+        userLoginLabel.text = profileData.loginName
+        messageLabel.text = profileData.biography
+    }
+}
+
 
 

@@ -18,7 +18,6 @@ final class ImagesListCell: UITableViewCell {
     
     @IBOutlet weak var gradientView: UIView!
     
-    
     func gradientHandler() {
         let caGradientLayer = CAGradientLayer()
         caGradientLayer.frame = gradientView.bounds
