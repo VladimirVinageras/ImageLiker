@@ -22,8 +22,9 @@ enum Constants {
     
     static let profilePath = "/me"
     static let userUsernamePath = "/users/"
-    static let photosPAth = "/photos"
+    static let photosPath = "/photos"
     
     static let forHTTPHeaderField = "Authorization"
     
+    static let photos_per_page = "17"
 }
