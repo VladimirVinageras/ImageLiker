@@ -3,4 +3,68 @@
    uuid = "121E5590-7D6F-470D-883B-655C49686F6B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E319D339-89F7-41E9-83AD-FFF9641AF1C9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageLikerTests/ImageLikerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "testExampleTest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0DB857D2-712B-44EF-9A29-DC958F325CD8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageLiker/ImageList/ImagesListService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "fetchPhotoNextPage(with:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0DB857D2-712B-44EF-9A29-DC958F325CD8 - aca905bbdaf65d70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageLiker.ImagesListService.fetchPhotoNextPage(with: Swift.String, _: (Swift.Result&lt;Swift.Array&lt;ImageLiker.Photo&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ImageLiker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Documents/ImageLiker/ImageLiker/ImageList/ImagesListService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73">
+               </Location>
+               <Location
+                  uuid = "0DB857D2-712B-44EF-9A29-DC958F325CD8 - 903299a0383eeb9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;ImageLiker.PhotoResult&gt;, Swift.Error&gt;) -&gt; () in ImageLiker.ImagesListService.fetchPhotoNextPage(with: Swift.String, _: (Swift.Result&lt;Swift.Array&lt;ImageLiker.Photo&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ImageLiker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladimir/Documents/ImageLiker/ImageLiker/ImageList/ImagesListService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -30,9 +30,8 @@ final class ImagesListService {
     
     
     
-    private func createImageListURLRequest(next_page : Int) -> URLRequest? {
-        guard let authorizationToken = storage.token,
-              let defaultBaseURL = Constants.defaultBaseURL?.description else {
+    private func createImageListURLRequest(with authorizationToken: String, next_page : Int) -> URLRequest? {
+           guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
             assertionFailure("Failed to create URL")
             return nil
         }
@@ -54,36 +53,37 @@ final class ImagesListService {
         var imageListURLRequest = URLRequest(url: url)
         
         imageListURLRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
+        imageListURLRequest.httpMethod = "GET"
         
         return imageListURLRequest
     }
     
-    func fetchPhotoNextPage(_ completion: @escaping (Result<Array<Photo>, Error>) -> Void){
-    //    let authorizationToken = storage.token
+    func fetchPhotoNextPage(with autorizationToken: String, _ completion: @escaping (Result<[Photo], Error>) -> Void){
+    
         let nextPage = (lastLoadedPage ?? 0) + 1
         
         task?.cancel()
         
-        guard let ImageListURLRequest = createImageListURLRequest(next_page: nextPage) else {
+        guard let ImageListURLRequest = createImageListURLRequest(with: autorizationToken, next_page: nextPage) else {
             print("❌❌❌❌[ImageListServiceError.fetchImageListURL]: ImageListServiceError - Request ERROR \(ImagesListServiceError.invalidRequest)")
             completion(.failure(ImagesListServiceError.invalidRequest))
             return
         }
         
-        let task = urlSession.objectTask(for: ImageListURLRequest) { (result: Result<Array<Photo>, Error>) in
+        let task = urlSession.objectTask(for: ImageListURLRequest) { (result: Result<[PhotoResult],Error>) in
             switch result {
             case .success(let photosListResult):
                 
                 var photosList = [Photo]()
                 for item in photosListResult {
-                    guard let id = item.id else {return}
-                    guard let width = item.width else {return}
-                    guard let heigth = item.heigth else {return}
-                    guard let createdAt = item.created_at else {return}
-                    guard let description = item.description else {return}
-                    guard let isLikedString = item.liked_by_user else {return}
+                    let id = item.id
+                    let width = item.width
+                    let height = item.height
+                    let createdAt = item.created_at
+                    let description = item.description
+                    let isLikedString = item.liked_by_user
                     
-                    let photo = Photo(id: id, created_at: createdAt, width: width,heigth: heigth, liked_by_user: isLikedString, description: description, urls: item.urls)
+                    let photo = Photo(id: id, created_at: createdAt, width: width,height: height, liked_by_user: isLikedString, description: description, urls: item.urls)
                     
                 
                     photosList.append(photo)
@@ -106,3 +106,24 @@ final class ImagesListService {
         
     }
 }
+
+
+extension ImagesListService {
+    func fetchPhotosNextPage() {
+        guard let authorizationToken = storage.token else {return}
+            
+        fetchPhotoNextPage(with: authorizationToken) { result  in
+                switch result {
+                case .success(let photos):
+                    
+                    print("❇️❇️❇️❇️Fetched photos successfully:", photos)
+                case .failure(let error):
+                    
+                    print("❌❌❌❌Failed to fetch photos:", error)
+                }
+            }
+        }
+}
+
+
+

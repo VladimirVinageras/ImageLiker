@@ -11,11 +11,11 @@ struct Photo : Codable {
     var id: String?
     var size: CGSize? {
         guard let width = width,
-              let heigth = heigth else {return CGSize(width: 200, height: 200)}
+              let height = height else {return CGSize(width: 200, height: 200)}
         
         let sizeWidth = Double(width)
-        let sizeHeigth = Double(heigth)
-        return CGSize(width: sizeWidth, height: sizeHeigth)
+        let sizeheight = Double(height)
+        return CGSize(width: sizeWidth, height: sizeheight)
     }
     
     var createdAt: String? {
@@ -38,7 +38,7 @@ struct Photo : Codable {
     
     var created_at: String?
     var width : Int?
-    var heigth : Int?
+    var height : Int?
     var liked_by_user: Bool?
     var description : String?
     var urls : PhotoUrlsResult?
