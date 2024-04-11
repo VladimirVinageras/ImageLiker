@@ -9,7 +9,7 @@ import Foundation
 
 struct Photo : Codable {
     var id: String?
-    var size: CGSize? {
+    var size: CGSize {
         guard let width = width,
               let height = height else {return CGSize(width: 200, height: 200)}
         
@@ -31,7 +31,7 @@ struct Photo : Codable {
     var largeImageURL: String? {
         return urls?.full
     }
-    var isLiked: Bool? {
+    var isLiked: Bool {
         guard let isLikedBool = liked_by_user else {return false}
         return isLikedBool
     }

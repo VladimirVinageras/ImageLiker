@@ -26,41 +26,39 @@ final class ImagesListService {
     private var bearerTokenRequest: (String) -> String = { input in
         return "Bearer \(input)"
     }
-    private var lastLoadedPage: Int?
+    private var lastLoadedPage = 0
     
     
     
     private func createImageListURLRequest(with authorizationToken: String, next_page : Int) -> URLRequest? {
-           guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
+        guard let defaultBaseURL = Constants.defaultBaseURL,
+                  var urlComponents = URLComponents(url: defaultBaseURL.appendingPathComponent(Constants.photosPath), resolvingAgainstBaseURL: false) else {
             assertionFailure("Failed to create URL")
             return nil
-        }
-        let urlRequest = defaultBaseURL + Constants.photosPath
-        guard let url = URL(string: urlRequest) else
-        {
-            assertionFailure("Invalid URL")
-            return nil
-        }
-        
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {return URLRequest(url: url)}
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "page", value: next_page.description),
-            URLQueryItem(name: "per_page", value: Constants.photos_per_page),
-            URLQueryItem(name: "order_by", value: "latest")
+            }
             
-        ]
-        var imageListURLRequest = URLRequest(url: url)
-        
-        imageListURLRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
-        imageListURLRequest.httpMethod = "GET"
-        
-        return imageListURLRequest
+            let page = String(next_page)
+            urlComponents.queryItems = [
+                URLQueryItem(name: "page", value: page),
+                URLQueryItem(name: "per_page", value: Constants.photos_per_page),
+                URLQueryItem(name: "order_by", value: "latest")
+            ]
+            
+            guard let url = urlComponents.url else {
+                assertionFailure("Failed to create URL")
+                return nil
+            }
+            
+            var imageListURLRequest = URLRequest(url: url)
+            imageListURLRequest.httpMethod = "GET"
+            imageListURLRequest.setValue("Bearer \(authorizationToken)", forHTTPHeaderField: "Authorization")
+            
+            return imageListURLRequest
     }
     
     func fetchPhotoNextPage(with autorizationToken: String, _ completion: @escaping (Result<[Photo], Error>) -> Void){
     
-        let nextPage = (lastLoadedPage ?? 0) + 1
+        let nextPage = lastLoadedPage + 1
         
         task?.cancel()
         
@@ -89,7 +87,7 @@ final class ImagesListService {
                     photosList.append(photo)
                     print("❇️❇️❇️❇️❇️❇️ \(String(describing: photo.largeImageURL))")
                 }
-                self.photos = photosList
+                self.photos.append(contentsOf: photosList)
                 completion(.success(photosList))
                 NotificationCenter.default
                     .post(
@@ -115,7 +113,7 @@ extension ImagesListService {
         fetchPhotoNextPage(with: authorizationToken) { result  in
                 switch result {
                 case .success(let photos):
-                    
+                    self.lastLoadedPage += 1
                     print("❇️❇️❇️❇️Fetched photos successfully:", photos)
                 case .failure(let error):
                     

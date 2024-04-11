@@ -18,6 +18,12 @@ final class ImagesListCell: UITableViewCell {
     
     @IBOutlet weak var gradientView: UIView!
     
+    override func prepareForReuse() {
+           super.prepareForReuse()
+        
+           imageToLike.kf.cancelDownloadTask()
+       }
+    
     func gradientHandler() {
         let caGradientLayer = CAGradientLayer()
         caGradientLayer.frame = gradientView.bounds
