@@ -15,6 +15,7 @@ final class ImagesListViewController: UIViewController {
     
     private var photosList: [Photo] = []
     private let imagesListServiceShared = ImagesListService.shared
+    private let photoDateFormatterServiceShared = PhotoDateFormatterService.shared
     private var imagesListServiceObserver : NSObjectProtocol?
     
     
@@ -43,7 +44,7 @@ final class ImagesListViewController: UIViewController {
             forName: ImagesListService.didChangeNotification,
             object: nil, queue: .main
         ) { [weak self] _ in
-            guard let self = self else { return }
+            guard let self = self else {return}
             self.updateTableViewAnimated()
         }
         
@@ -75,7 +76,7 @@ final class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController {
     
-    fileprivate func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let cellPhoto = photosList[indexPath.row]
         guard let thumbImageURLString = cellPhoto.thumbImageURL,
               let imageURL = URL(string: thumbImageURLString) else {return}
@@ -85,20 +86,18 @@ extension ImagesListViewController {
             with: imageURL,
             placeholder: UIImage(named: "scribbleVariable")
         ) { [weak self] _ in
-            guard let self = self else { return }
+            guard let self = self else {return}
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         let dateCreatedAt = cellPhoto.createdAt
         let isPhotoLiked = cellPhoto.isLiked
         let isLikedButton = isPhotoLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
         
-        cell.dateLabel.text = dateCreatedAt
         cell.likeButton.setImage(isLikedButton, for: .normal)
+        cell.dateLabel.text = photoDateFormatterServiceShared.formattingPhotoDate(with: dateCreatedAt)
         cell.gradientHandler()
+        cell.selectionStyle = .none
     }
-    
-    
-    
 }
 
 //MARK: - DATASOURCE extension
@@ -113,7 +112,7 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        
+        imageListCell.delegate = self
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
@@ -129,8 +128,11 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+        
+  
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -146,34 +148,51 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 }
 
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        
+        guard let indexPath = tableView.indexPath(for: cell) else {return}
+        let photo = photosList[indexPath.row]
+ 
+        UIBlockingProgressHUD.show()
+        guard let photoId = photo.id else {return}
+        imagesListServiceShared.toggleLikeState(photoId: photoId, isPhotoLiked: photo.isLiked) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case.success:
+                self.photosList = self.imagesListServiceShared.photos
+                cell.setIsLiked(isLiked: self.photosList[indexPath.row].isLiked)
+                UIBlockingProgressHUD.dismiss()
+            case.failure:
+                UIBlockingProgressHUD.dismiss()
+                assertionFailure("Something went wrong in Like changing")
+            }
+        }
+    }
+}
+
 extension ImagesListViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
-                let viewController = segue.destination as? SingleImageViewController,
+                let singleImageViewController = segue.destination as? SingleImageViewController,
                 let indexPath = sender as? IndexPath
             else {
                 assertionFailure("Invalid segue destination")
                 return
             }
-            //TODO: - Fetch the image
-            let viewImageHolder = UIImageView()
-            let photoToFetch = photosList[indexPath.row]
-            guard let fullImageURLString = photoToFetch.largeImageURL,
-                  let imageURL = URL(string: fullImageURLString) else {return}
             
-            viewImageHolder.kf.indicatorType = .activity
-            viewImageHolder.kf.setImage(
-                with: imageURL,
-                placeholder: UIImage(named: "scribbleVariable")
-            ) {[weak self] _ in
-                viewController.image = viewImageHolder.image
-            }
-//            let imageToShow = viewImageHolder.image
-//            viewController.image = viewImageHolder.image
+            guard let photoFullSizeUrlString = photosList[indexPath.row].largeImageURL,
+                  let photoFullSizeUrlString = URL(string: photoFullSizeUrlString) else {return}
+        
+            singleImageViewController.imageFullSizeUrl = photoFullSizeUrlString
+           
         } else {
             super.prepare(for: segue, sender: sender)
         }
     }
+    
+
 }

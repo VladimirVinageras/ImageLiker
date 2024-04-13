@@ -12,7 +12,7 @@ enum Constants {
     static let secretKey = "zZaBoyLCz4A1xY-rhM0QjQzPcTdvKYauBu-Gz7IFjNc"
     static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
     
-    static let accessScope = "public+read_user"
+    static let accessScope = "public+read_user+write_likes+"
     static let defaultBaseURL = URL(string: "https://api.unsplash.com")
     static let baseURL = URL(string: "https://unsplash.com")
     
@@ -27,4 +27,8 @@ enum Constants {
     static let forHTTPHeaderField = "Authorization"
     
     static let photos_per_page = "17"
+    
+    static let likePath = "/like"
+    
+    static let invalidKeyForSuccessfulLogout = "Invalid_key_For_Successful_Logout"
 }

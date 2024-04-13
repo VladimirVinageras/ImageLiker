@@ -18,6 +18,7 @@ final class ProfileViewController: UIViewController {
     private var logOutButton : UIButton?
     
     private let profileServiceShared = ProfileService.shared
+    private let profileLogoutShared = ProfileLogoutService.shared
     private var oauth2tokenStorageShared = OAuth2TokenStorage.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
@@ -54,7 +55,7 @@ final class ProfileViewController: UIViewController {
         guard
             let profileImageURL = ProfileImageService.shared.profileImage,
             let url = URL(string: profileImageURL)
-        else { return }
+        else {return}
         updatingProfileImage(for: url)
     }
 
@@ -142,6 +143,22 @@ final class ProfileViewController: UIViewController {
     @objc
     private func didTapButton(){
         print("I'll miss you 🥺")
+        logoutConfirmation()
+    }
+    
+    private func logoutConfirmation(){
+        let alertController = UIAlertController(
+            title: "Пока,пока",
+            message: "Уверены что хотите выйти?",
+            preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] action in
+            guard let self = self else { return }
+            self.profileLogoutShared.profileLogout()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
+        
+       self.present(alertController, animated: true, completion: nil)
     }
 }
 

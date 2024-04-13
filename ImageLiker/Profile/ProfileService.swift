@@ -15,9 +15,10 @@ enum ProfileServiceError: Error {
 final class ProfileService{
     static let shared = ProfileService()
     private init(){}
+   
+    private let urlSession = URLSession.shared
     
     private(set) var profileData : Profile?
-    private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private var bearerTokenRequest: (String) -> String = { input in
         return "Bearer \(input)"
@@ -62,5 +63,15 @@ final class ProfileService{
             self.task = nil
         }
         task.resume()
+    }
+}
+
+//MARK: - CLEANING DATA FOR LOGOUT SERVICE
+
+extension ProfileService{
+    func cleaningData() {
+        profileData = nil
+        task?.cancel()
+        task = nil
     }
 }

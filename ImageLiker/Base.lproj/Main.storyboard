@@ -108,6 +108,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN9-Q7-VYZ" userLabel="likeButton">
                                                     <rect key="frame" x="347" y="4" width="30" height="34"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <connections>
+                                                        <action selector="likeButtonTapped:" destination="HJQ-nk-PaR" eventType="touchUpInside" id="h2g-tK-SWm"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31 февраля 2025" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDm-eE-6G7" userLabel="dateLabel">
                                                     <rect key="frame" x="24" y="358" width="152" height="18"/>
@@ -196,16 +199,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-YE-fnl">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-YE-fnl">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="9W2-eL-Kiw">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="9W2-eL-Kiw">
+                                        <rect key="frame" x="0.0" y="232" width="393" height="300"/>
                                         <color key="backgroundColor" name="YP Black"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="YP Black"/>
+                                <constraints>
+                                    <constraint firstItem="9W2-eL-Kiw" firstAttribute="bottom" secondItem="jKa-YE-fnl" secondAttribute="bottom" id="5WH-Er-bVt"/>
+                                    <constraint firstItem="9W2-eL-Kiw" firstAttribute="top" secondItem="jKa-YE-fnl" secondAttribute="top" id="Qlb-6d-73l"/>
+                                    <constraint firstItem="9W2-eL-Kiw" firstAttribute="left" secondItem="jKa-YE-fnl" secondAttribute="left" id="Wir-xa-8r4"/>
+                                    <constraint firstItem="9W2-eL-Kiw" firstAttribute="right" secondItem="jKa-YE-fnl" secondAttribute="right" id="jKx-ie-UTB"/>
+                                </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="C91-JS-VID"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="IPd-YS-f27"/>
                                 <connections>
@@ -245,12 +253,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Xu-wj-6wT" firstAttribute="bottom" secondItem="pEy-E4-VNd" secondAttribute="bottom" constant="50" id="7Mg-oQ-CTO"/>
-                            <constraint firstItem="jKa-YE-fnl" firstAttribute="bottom" secondItem="eer-xa-jMW" secondAttribute="bottom" id="BIF-J8-jGu"/>
-                            <constraint firstItem="jKa-YE-fnl" firstAttribute="leading" secondItem="eer-xa-jMW" secondAttribute="leading" id="TLi-sR-EoH"/>
-                            <constraint firstItem="jKa-YE-fnl" firstAttribute="trailing" secondItem="eer-xa-jMW" secondAttribute="trailing" id="a33-Fe-4eR"/>
+                            <constraint firstItem="jKa-YE-fnl" firstAttribute="top" secondItem="eer-xa-jMW" secondAttribute="top" id="Nwz-nZ-Gcp"/>
+                            <constraint firstItem="jKa-YE-fnl" firstAttribute="trailing" secondItem="eer-xa-jMW" secondAttribute="trailing" id="RpV-oR-GV1"/>
+                            <constraint firstItem="jKa-YE-fnl" firstAttribute="bottom" secondItem="eer-xa-jMW" secondAttribute="bottom" id="TpW-DN-s6g"/>
                             <constraint firstItem="biI-wj-zpR" firstAttribute="leading" secondItem="9Xu-wj-6wT" secondAttribute="leading" constant="9" id="aAt-Wj-R7R"/>
                             <constraint firstItem="biI-wj-zpR" firstAttribute="top" secondItem="9Xu-wj-6wT" secondAttribute="top" constant="11" id="b5m-AI-VgR"/>
-                            <constraint firstItem="jKa-YE-fnl" firstAttribute="top" secondItem="eer-xa-jMW" secondAttribute="top" id="sXa-b5-Un0"/>
+                            <constraint firstItem="jKa-YE-fnl" firstAttribute="leading" secondItem="eer-xa-jMW" secondAttribute="leading" id="smn-tw-wKk"/>
                             <constraint firstItem="pEy-E4-VNd" firstAttribute="centerX" secondItem="9Xu-wj-6wT" secondAttribute="centerX" id="yKf-9d-GFs"/>
                         </constraints>
                     </view>
@@ -261,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKK-gs-aE1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="-63"/>
+            <point key="canvasLocation" x="1003.8167938931298" y="-63.380281690140848"/>
         </scene>
         <!--Web View View Controller-->
         <scene sceneID="Dqi-l2-5kA">

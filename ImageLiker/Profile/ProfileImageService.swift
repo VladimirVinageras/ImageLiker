@@ -18,8 +18,9 @@ final class ProfileImageService{
     
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
-    private (set) var profileImage: String?
     private let urlSession = URLSession.shared
+    
+    private (set) var profileImage: String?
     private var task : URLSessionTask?
     
     private var bearerTokenRequest: (String) -> String = { input in
@@ -59,7 +60,7 @@ final class ProfileImageService{
             case .success(let profileImageResult):
                 
                 if let profileImage = profileImageResult.profileImage {
-                    guard let profileImageURL = profileImage.large else { return }
+                    guard let profileImageURL = profileImage.large else {return}
                     self.profileImage = profileImageURL
                     completion(.success(profileImageURL))
                     NotificationCenter.default
@@ -78,4 +79,14 @@ final class ProfileImageService{
         
     }
     
+}
+
+//MARK: - CLEANING DATA FOR LOGOUT SERVICE
+
+extension ProfileImageService{
+    func cleaningData() {
+        profileImage = nil
+        task?.cancel()
+        task = nil
+    }
 }
