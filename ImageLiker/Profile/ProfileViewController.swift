@@ -148,7 +148,7 @@ final class ProfileViewController: UIViewController {
     
     private func logoutConfirmation(){
         let alertController = UIAlertController(
-            title: "Пока,пока",
+            title: "Пока,пока!",
             message: "Уверены что хотите выйти?",
             preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] action in
