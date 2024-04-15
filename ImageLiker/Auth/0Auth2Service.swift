@@ -80,7 +80,7 @@ final class OAuth2Service {
             switch result {
             case .success(let data):
                 
-                guard let accessToken = data.accessToken else { return }
+                guard let accessToken = data.accessToken else {return}
                 completion(.success(accessToken))
             case .failure(let error):
                 print("❌❌❌❌[OAuth2Service.objectTask]: Request ERROR \(error)")

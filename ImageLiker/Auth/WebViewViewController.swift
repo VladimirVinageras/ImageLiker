@@ -34,7 +34,7 @@ extension WebViewViewController{
         }
         
         private func loadAuthView(){
-            guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else { return }
+            guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {return}
             
             urlComponents.queryItems = [
                 URLQueryItem(name: "client_id", value: Constants.accesKey),
@@ -42,7 +42,7 @@ extension WebViewViewController{
                 URLQueryItem(name: "response_type", value: "code"),
                 URLQueryItem(name: "scope", value: Constants.accessScope)
             ]
-            guard let url = urlComponents.url else { return }
+            guard let url = urlComponents.url else {return}
             let request = URLRequest(url: url)
             webView.load(request)
         }
@@ -52,7 +52,7 @@ extension WebViewViewController{
             \.estimatedProgress,
              options: [],
              changeHandler: { [weak self] _, _ in
-                 guard let self = self else { return }
+                 guard let self = self else {return}
                  self.updateProgress()
              })
     }

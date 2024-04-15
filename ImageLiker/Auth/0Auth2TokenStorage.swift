@@ -19,7 +19,7 @@ final class OAuth2TokenStorage {
             return keychainWrapper.string(forKey: tokenKey)
         }
         set {
-            guard let token = newValue else { return }
+            guard let token = newValue else {return}
             keychainWrapper.set(token, forKey: tokenKey)
         }
     }

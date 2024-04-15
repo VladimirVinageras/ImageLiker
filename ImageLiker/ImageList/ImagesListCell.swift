@@ -9,14 +9,28 @@ import Foundation
 import UIKit
 
 final class ImagesListCell: UITableViewCell {
-    
+   
+    weak var delegate: ImagesListCellDelegate?
     static let reuseIdentifier = "ImagesListCell"
-    
+
     @IBOutlet weak var imageToLike: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var gradientView: UIView!
+    
+    override func prepareForReuse() {
+           super.prepareForReuse()
+        
+           imageToLike.kf.cancelDownloadTask()
+       }
+   
+    @IBAction func likeButtonTapped(_ sender: Any) {
+        
+           delegate?.imageListCellDidTapLike(self)
+        
+        }
+    
     
     func gradientHandler() {
         let caGradientLayer = CAGradientLayer()
@@ -31,6 +45,11 @@ final class ImagesListCell: UITableViewCell {
         caGradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
 
         gradientView.layer.addSublayer(caGradientLayer)
+    }
+    
+    func setIsLiked(isLiked: Bool) {
+        let isLiked = isLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
+        likeButton.setImage(isLiked, for: .normal)
     }
     
 }
