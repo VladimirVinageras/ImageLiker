@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E771E8D02BD0764E00A31B11 /* ImageListProtocolList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E771E8CF2BD0764E00A31B11 /* ImageListProtocolList.swift */; };
+		E771E8D22BD0768D00A31B11 /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E771E8D12BD0768D00A31B11 /* ImagesListPresenter.swift */; };
+		E771E8D42BD0796100A31B11 /* ImagesListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E771E8D32BD0796100A31B11 /* ImagesListTests.swift */; };
 		E77A37302BA1E0B800E3FFCC /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A372F2BA1E0B800E3FFCC /* AuthConfiguration.swift */; };
 		E77A37332BA4EF0D00E3FFCC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A37322BA4EF0D00E3FFCC /* AuthViewController.swift */; };
 		E77A37352BA4EF9C00E3FFCC /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77A37342BA4EF9C00E3FFCC /* WebViewViewController.swift */; };
@@ -49,7 +52,6 @@
 		E7F7928F2BC4C64D008BEA79 /* PhotoUrlsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7928E2BC4C64D008BEA79 /* PhotoUrlsResult.swift */; };
 		E7F792912BC4C655008BEA79 /* PhotosList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F792902BC4C655008BEA79 /* PhotosList.swift */; };
 		E7F792C02BC7C862008BEA79 /* PhotoLikeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F792BF2BC7C862008BEA79 /* PhotoLikeResult.swift */; };
-		E7F792C22BC875B5008BEA79 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F792C12BC875B5008BEA79 /* ImagesListCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E771E8CF2BD0764E00A31B11 /* ImageListProtocolList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListProtocolList.swift; sourceTree = "<group>"; };
+		E771E8D12BD0768D00A31B11 /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
+		E771E8D32BD0796100A31B11 /* ImagesListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListTests.swift; sourceTree = "<group>"; };
 		E77A372F2BA1E0B800E3FFCC /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		E77A37322BA4EF0D00E3FFCC /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E77A37342BA4EF9C00E3FFCC /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +110,6 @@
 		E7F7928E2BC4C64D008BEA79 /* PhotoUrlsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrlsResult.swift; sourceTree = "<group>"; };
 		E7F792902BC4C655008BEA79 /* PhotosList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosList.swift; sourceTree = "<group>"; };
 		E7F792BF2BC7C862008BEA79 /* PhotoLikeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLikeResult.swift; sourceTree = "<group>"; };
-		E7F792C12BC875B5008BEA79 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 		E77B14E22BCE0A2E00CAE4C1 /* ImageLikerTests */ = {
 			isa = PBXGroup;
 			children = (
+				E771E8D32BD0796100A31B11 /* ImagesListTests.swift */,
 				E77B14E32BCE0A2E00CAE4C1 /* WebViewTests.swift */,
 				E77B14EF2BCE7CB900CAE4C1 /* TestDoubleClassesList.swift */,
 			);
@@ -220,10 +225,11 @@
 			isa = PBXGroup;
 			children = (
 				E78855DC2B71A54400B244BC /* ImagesListCell.swift */,
-				E7F792C12BC875B5008BEA79 /* ImagesListCellDelegate.swift */,
 				E7F792882BC4C618008BEA79 /* ImagesListService.swift */,
 				E78855CC2B6DCE5100B244BC /* ImagesListViewController.swift */,
 				E7B1C4712B86BE4D00D37669 /* SingleImageViewController.swift */,
+				E771E8CF2BD0764E00A31B11 /* ImageListProtocolList.swift */,
+				E771E8D12BD0768D00A31B11 /* ImagesListPresenter.swift */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E771E8D42BD0796100A31B11 /* ImagesListTests.swift in Sources */,
 				E77B14E42BCE0A2E00CAE4C1 /* WebViewTests.swift in Sources */,
 				E77B14F02BCE7CB900CAE4C1 /* TestDoubleClassesList.swift in Sources */,
 			);
@@ -389,6 +396,7 @@
 				E77B14D42BCDD9C600CAE4C1 /* WebViewPresenter.swift in Sources */,
 				E7F29BBC2BBF6A3300E9FCFE /* TabBarController.swift in Sources */,
 				E788D2222B80388E00B7A335 /* ProfileViewController.swift in Sources */,
+				E771E8D22BD0768D00A31B11 /* ImagesListPresenter.swift in Sources */,
 				E7D566632BCB2FB800F0557C /* PhotoDateFormatterService.swift in Sources */,
 				E7F792C02BC7C862008BEA79 /* PhotoLikeResult.swift in Sources */,
 				E78855C92B6DCE5100B244BC /* AppDelegate.swift in Sources */,
@@ -405,9 +413,9 @@
 				E77A373F2BAF7D2200E3FFCC /* OAuthTokenResponseBody.swift in Sources */,
 				E7F29BAD2BBDE71300E9FCFE /* ProfileImageService.swift in Sources */,
 				E77B14D62BCDDBFB00CAE4C1 /* WebViewProtocolList.swift in Sources */,
+				E771E8D02BD0764E00A31B11 /* ImageListProtocolList.swift in Sources */,
 				E77A37352BA4EF9C00E3FFCC /* WebViewViewController.swift in Sources */,
 				E78855CB2B6DCE5100B244BC /* SceneDelegate.swift in Sources */,
-				E7F792C22BC875B5008BEA79 /* ImagesListCellDelegate.swift in Sources */,
 				E7F792912BC4C655008BEA79 /* PhotosList.swift in Sources */,
 				E77A37412BAF82A000E3FFCC /* OAuth2TokenStorage.swift in Sources */,
 				E7D8B2E12BB34FE3007AC2FC /* SplashViewController.swift in Sources */,

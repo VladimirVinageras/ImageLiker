@@ -8,17 +8,16 @@
 import UIKit
 import Kingfisher
 
-final class ImagesListViewController: UIViewController {
-    
+final class ImagesListViewController: UIViewController, ImagesListViewControllerProtocol {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var presenter: ImagesListPresenterProtocol?
     
     private var photosList: [Photo] = []
     private let imagesListServiceShared = ImagesListService.shared
     private let photoDateFormatterServiceShared = PhotoDateFormatterService.shared
     private var imagesListServiceObserver : NSObjectProtocol?
-    
-    
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     private lazy var dateFormatter: DateFormatter = {
@@ -193,6 +192,11 @@ extension ImagesListViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
+   
     
+    func selfConfiguration(_ presenter: ImagesListPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter?.view = self
+    }
 
 }
