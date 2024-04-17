@@ -274,7 +274,7 @@
         <!--Web View View Controller-->
         <scene sceneID="Dqi-l2-5kA">
             <objects>
-                <viewController id="Uaa-6V-Okj" customClass="WebViewViewController" customModule="ImageLiker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewViewController" id="Uaa-6V-Okj" customClass="WebViewViewController" customModule="ImageLiker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qVZ-OR-nFS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

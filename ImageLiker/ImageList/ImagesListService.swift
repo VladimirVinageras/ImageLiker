@@ -28,8 +28,6 @@ final class ImagesListService {
     }
     private var lastLoadedPage = 0
     
-    
-    
     private func createImageListURLRequest(with authorizationToken: String, next_page : Int) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL,
               var urlComponents = URLComponents(url: defaultBaseURL.appendingPathComponent(Constants.photosPath), resolvingAgainstBaseURL: false) else {
@@ -134,15 +132,9 @@ extension ImagesListService {
         guard let token = storage.token else {return}
         var toggleLikeStateRequest : URLRequest?
         
+        toggleLikeStateRequest = createLikeRequest(token, for: photoId, when: isPhotoLiked)
         
-        if isPhotoLiked  {
-            toggleLikeStateRequest = createDeleteLikeRequest(token, photoId: photoId)
-        } else {
-            toggleLikeStateRequest = createPostLikeRequest(token, photoId: photoId)
-        }
-        
-        guard let toggleLikeStateRequest = toggleLikeStateRequest
-        else {return}
+        guard let toggleLikeStateRequest = toggleLikeStateRequest else {return}
         
         
         let task = URLSession.shared.objectTask(for: toggleLikeStateRequest) { [weak self] (result: Result<PhotoLikeResult, Error>) in
@@ -177,7 +169,7 @@ extension ImagesListService {
     
     
     //MARK: - CREATING REQUESTS
-    private func createPostLikeRequest(_ authorizationToken: String, photoId: String) -> URLRequest? {
+    private func createLikeRequest(_ authorizationToken: String, for photoId: String, when isLiked: Bool) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
             assertionFailure("Failed to create URL")
             return nil
@@ -190,28 +182,10 @@ extension ImagesListService {
         }
         var postLikeRequest = URLRequest(url: url)
         postLikeRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
-        postLikeRequest.httpMethod = "POST"
+        postLikeRequest.httpMethod = isLiked ? "POST" : "DELETE"
         
         return postLikeRequest
         
-    }
-    
-    private func createDeleteLikeRequest(_ authorizationToken: String, photoId: String) -> URLRequest? {
-        guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
-            assertionFailure("Failed to create URL")
-            return nil
-        }
-        let slash = "/"
-        let urlRequestString = defaultBaseURL + Constants.photosPath + slash + photoId + Constants.likePath
-        
-        guard let url = URL(string: urlRequestString) else {
-            assertionFailure("Failed to create URL")
-            return nil
-        }
-        var deleteLikeRequest = URLRequest(url: url)
-        deleteLikeRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
-        deleteLikeRequest.httpMethod = "DELETE"
-        return deleteLikeRequest
     }
 }
 

@@ -35,7 +35,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E7F792B22BC75E53008BEA79"
+               BlueprintIdentifier = "E77B14E02BCE0A2E00CAE4C1"
                BuildableName = "ImageLikerTests.xctest"
                BlueprintName = "ImageLikerTests"
                ReferencedContainer = "container:ImageLiker.xcodeproj">
