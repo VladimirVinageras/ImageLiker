@@ -8,7 +8,7 @@
 @testable import ImageLiker
 import XCTest
 
-final class ImagesListUnitTest: XCTestCase {
+final class ImagesListTest: XCTestCase {
     
     func testDateToString() {
         //given

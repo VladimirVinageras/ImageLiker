@@ -7,9 +7,16 @@
 
 import Foundation
 
-protocol ProfilePresenterProtocol{
+public protocol ProfilePresenterProtocol{
+    var view: ProfileViewControllerProtocol? {get set}
     
+    func updateAvatar() -> URL?
+    func updateProfileData() -> [String]?
+    func cleanData()
 }
 
 
-protocol ProfileViewControllerProcotol
+public protocol ProfileViewControllerProtocol :  AnyObject {
+    var presenter : ProfilePresenterProtocol? {get set}
+}
+

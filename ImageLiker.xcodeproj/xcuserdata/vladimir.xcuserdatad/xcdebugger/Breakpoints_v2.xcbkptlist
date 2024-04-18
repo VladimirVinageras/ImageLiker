@@ -23,32 +23,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C9409988-9763-464D-BC69-B95F1C4B607B"
+            uuid = "DB6BB457-A308-471A-8610-C6D23F4B2DD2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ImageLikerTests/ImagesListTests.swift"
+            filePath = "ImageLiker/Profile/ProfilePresenterSpy.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "testInvalidDateToString()"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "updateAvatar()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "29C3A4D7-5D70-4D81-A361-EEB575ACFC6A"
+            uuid = "D9BBC1D5-2DDD-4A68-B24B-DBBC9D23ADA8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ImageLikerTests/ImagesListTests.swift"
+            filePath = "ImageLiker/Profile/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "testInvalidDateToString()"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -42,3 +42,23 @@ final class WebViewPresenterSpy: WebViewPresenterProtocol {
         return nil
     }
 }
+
+
+final class ProfilePresenterSpy: ProfilePresenterProtocol{
+    var view: ProfileViewControllerProtocol?
+    var didCalledUpdateAvatar = false
+    var didCalledUpdateProfileData = false
+    var didCalledCleanData = false
+    
+    func updateAvatar() -> URL?{
+        didCalledUpdateAvatar = true
+        return nil
+    }
+    func updateProfileData() -> [String]?{
+        didCalledUpdateProfileData = true
+        return nil
+    }
+    func cleanData(){
+        didCalledCleanData = true
+    }
+}

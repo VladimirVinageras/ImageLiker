@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    var presenter: (any ProfilePresenterProtocol)?
+    
     private var userNameLabel = UILabel()
     private var userLoginLabel = UILabel()
     private var messageLabel = UILabel()
@@ -17,10 +19,9 @@ final class ProfileViewController: UIViewController {
     private var imageView : UIImageView?
     private var logOutButton : UIButton?
     
-    private let profileServiceShared = ProfileService.shared
-    private let profileLogoutShared = ProfileLogoutService.shared
-    private var oauth2tokenStorageShared = OAuth2TokenStorage.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -36,8 +37,8 @@ final class ProfileViewController: UIViewController {
         createMessageLabel(message: "Hello, IOS15!")
         activateConstraints()
         
-        guard let profileData = profileServiceShared.profileData else {return}
-        updateProfileData(with: profileData)
+    
+        updateProfileData()
         
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(
@@ -45,31 +46,29 @@ final class ProfileViewController: UIViewController {
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
-                self?.updateAvatar()
+            self?.updatingProfileImage()
+                
             }
         
-        self.updateAvatar()
+        self.updatingProfileImage()
     }
             
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.profileImage,
-            let url = URL(string: profileImageURL)
-        else {return}
-        updatingProfileImage(for: url)
-    }
-
-    private func updatingProfileImage(for url: URL){
+  private  func updatingProfileImage(){
+        guard let presenter = presenter else {return}
         guard let imageView = imageView else {return}
         imageView.backgroundColor = .ypBlack
         let processor = RoundCornerImageProcessor(cornerRadius: 50)
         
         imageView.kf.indicatorType = .activity
+        
         imageView.kf.setImage(
-            with: url,
+            with: self.updateAvatar(),
             placeholder: UIImage(named: "placeholder.jpeg"),
             options: [.processor(processor)])
-        
+    }
+    
+    func updateAvatar() -> URL?{
+        presenter?.updateAvatar()
     }
     
     private func createUserProfileImageView(systemNameImage : String){
@@ -143,6 +142,7 @@ final class ProfileViewController: UIViewController {
     @objc
     private func didTapButton(){
         print("I'll miss you 🥺")
+        guard let presenter = presenter else {return}
         logoutConfirmation()
     }
     
@@ -153,25 +153,40 @@ final class ProfileViewController: UIViewController {
             preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] action in
             guard let self = self else { return }
-            self.profileLogoutShared.profileLogout()
+            cleanData()
         }))
         
         alertController.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
         
        self.present(alertController, animated: true, completion: nil)
     }
+    
+    func cleanData(){
+        presenter?.cleanData()
+    }
+    
 }
 
 
 extension ProfileViewController {
     
-private func updateProfileData(with profileData: Profile){
-        
-        userNameLabel.text = profileData.name
-        userLoginLabel.text = profileData.loginName
-        messageLabel.text = profileData.biography
+func selfConfiguration(_ presenter: ProfilePresenterProtocol) {
+        self.presenter = presenter
+    }
+    
+private func updateProfileData(){
+    let profileData = updatingProfileData()
+    userNameLabel.text = profileData[0]
+    userLoginLabel.text = profileData[1]
+        messageLabel.text = profileData[2]
+    }
+    
+    func updatingProfileData() -> [String] {
+        guard var profileData = presenter?.updateProfileData() else {return []}
+        return profileData
     }
 }
+
 
 
 
