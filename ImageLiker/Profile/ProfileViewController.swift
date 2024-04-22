@@ -36,6 +36,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         createUserLoginLabel(userLogin: "@ekaterina_vin")
         createMessageLabel(message: "Hello, IOS15!")
         activateConstraints()
+        presenter = ProfilePresenter()
         
     
         updateProfileData()
@@ -117,6 +118,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         guard let logOutButton = logOutButton else {return}
         logOutButton.tintColor = .ypRed
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        logOutButton.accessibilityIdentifier = "logOutButton"
         view.addSubview(logOutButton)
     }
     
@@ -159,6 +161,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         alertController.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
         
        self.present(alertController, animated: true, completion: nil)
+        print(alertController.children.description)
     }
     
     func cleanData(){

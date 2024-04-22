@@ -32,7 +32,7 @@ final class ProfileTests: XCTestCase {
         viewController.updatingProfileData()
         
         //then
-        XCTAssertTrue(presenter.didCalledUpdateProfileData) //behaviour verification
+        XCTAssertTrue(presenter.didCalledUpdateProfileData) 
     }
     
     func testProfilePresenterCleanData() {
@@ -44,7 +44,7 @@ final class ProfileTests: XCTestCase {
         viewController.cleanData()
         
         //then
-        XCTAssertTrue(presenter.didCalledCleanData) //behaviour verification
+        XCTAssertTrue(presenter.didCalledCleanData)
     }
  
     func testProfileViewLogoutTokenIsEqualNil() {
