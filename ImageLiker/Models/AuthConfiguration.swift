@@ -26,14 +26,11 @@ enum Constants {
     
     static let forHTTPHeaderField = "Authorization"
     
-    static let photos_per_page = "2"
+    static let photos_per_page = "10"
     
     static let likePath = "/like"
     
     static let invalidKeyForSuccessfulLogout = "Invalid_key_For_Successful_Logout"
-    
-    static let authorizationLogin : String = "vvinageras@gmail.com"
-    static let authorizationPassword : String = "1q2w3e4r"
 }
 
 
@@ -77,9 +74,7 @@ struct AuthConfiguration{
     let photos_per_page: String
     let likePath: String
     let invalidKeyForSuccessfulLogout: String
-    
-    let authorizationLogin : String
-    let authorizationPassword : String
+
     
     init(
         accesKey: String,
@@ -115,9 +110,5 @@ struct AuthConfiguration{
         self.photos_per_page = photos_per_page
         self.likePath = likePath
         self.invalidKeyForSuccessfulLogout = invalidKeyForSuccessfulLogout
-        
-        self.authorizationLogin = Constants.authorizationLogin
-        self.authorizationPassword = Constants.authorizationPassword
     }
-    
 }

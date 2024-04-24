@@ -17,6 +17,7 @@ final class ImageLikerUITests: XCTestCase {
         app.launch() // запускаем приложение перед каждым тестом
     }
     
+    //IMPORTANT: - Before running testAuth(), erase All content and Settings in your Simulator (Simulator -> Device -> Erase All Content and Settings...)
     func testAuth() throws {
       
             app.buttons["Authenticate"].tap()
@@ -28,7 +29,7 @@ final class ImageLikerUITests: XCTestCase {
             XCTAssertTrue(webView.waitForExistence(timeout: 5))
         
             loginTextField.tap()
-            loginTextField.typeText("vvinageras@gmail.com")
+            loginTextField.typeText("<Your_email>")
             loginTextField.swipeUp()
             
             
@@ -36,7 +37,7 @@ final class ImageLikerUITests: XCTestCase {
             XCTAssertTrue(passwordTextField.waitForExistence(timeout: 3))
             
             passwordTextField.tap()
-            passwordTextField.typeText("1q2w3e4r")
+            passwordTextField.typeText("<Your_password>")
             webView.swipeUp()
             
             let webViewsQuery = app.webViews
@@ -72,7 +73,7 @@ final class ImageLikerUITests: XCTestCase {
         image.pinch(withScale: 2, velocity: 1)
         image.pinch(withScale: 0.5, velocity: -1)
         
-        let navBackButton = app.buttons["BackButton"]  //TODO: FIX THIS BUTTON ACCESS IN TEST RUNTIME!!!
+        let navBackButton = app.buttons["BackButton"]
         navBackButton.tap()
         
         XCTAssertTrue(cellToLike.waitForExistence(timeout: 1))
@@ -82,8 +83,8 @@ final class ImageLikerUITests: XCTestCase {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 1).tap()
         
-        XCTAssertTrue(app.staticTexts["@vvinakheras"].exists)
-        XCTAssertTrue(app.staticTexts["Still looking for magic 🤪🤪"].exists)
+        XCTAssertTrue(app.staticTexts["<@Your_username>"].exists)
+        XCTAssertTrue(app.staticTexts["<Your_Bio> || <Your Name>"].exists)
         
         app.buttons["logOutButton"].tap()
         app.alerts["Пока,пока!"].scrollViews.otherElements.buttons["Да"].tap()
