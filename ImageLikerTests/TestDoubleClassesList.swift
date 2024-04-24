@@ -41,6 +41,7 @@ final class WebViewPresenterSpy: WebViewPresenterProtocol {
     func code(url: URL?) -> String? {
         return nil
     }
+
 }
 
 

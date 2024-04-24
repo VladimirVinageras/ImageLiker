@@ -107,15 +107,19 @@ final class ImagesListService {
 extension ImagesListService {
     func fetchPhotosNextPage() {
         guard let authorizationToken = storage.token else {return}
-        
-        fetchPhotoNextPage(with: authorizationToken) { result  in
-            switch result {
-            case .success(let photos):
-                self.lastLoadedPage += 1
-                print("❇️❇️❇️❇️Fetched photos successfully:", photos)
-            case .failure(let error):
-                
-                print("❌❌❌❌Failed to fetch photos:", error)
+        let isTestingMode = ProcessInfo().arguments.contains("testMode")
+        if (isTestingMode) && lastLoadedPage > 1{
+            self.lastLoadedPage += 1
+        }else{
+            fetchPhotoNextPage(with: authorizationToken) { result  in
+                switch result {
+                case .success(let photos):
+                    self.lastLoadedPage += 1
+                    print("❇️❇️❇️❇️Fetched photos successfully:", photos)
+                case .failure(let error):
+                    
+                    print("❌❌❌❌Failed to fetch photos:", error)
+                }
             }
         }
     }

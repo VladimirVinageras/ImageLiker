@@ -108,8 +108,9 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN9-Q7-VYZ" userLabel="likeButton">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XN9-Q7-VYZ">
                                                     <rect key="frame" x="347" y="4" width="30" height="34"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="likeButton"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <connections>
                                                         <action selector="likeButtonTapped:" destination="HJQ-nk-PaR" eventType="touchUpInside" id="h2g-tK-SWm"/>
@@ -223,8 +224,9 @@
                                     <outlet property="delegate" destination="dgB-sr-Twe" id="w7s-VL-ixD"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="biI-wj-zpR" userLabel="BackButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="biI-wj-zpR">
                                 <rect key="frame" x="9" y="11" width="24" height="24"/>
+                                <accessibility key="accessibilityConfiguration" identifier="BackButton" label="BackButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="BVK-mt-pAo"/>
                                     <constraint firstAttribute="width" constant="24" id="LVf-pd-ALG"/>
