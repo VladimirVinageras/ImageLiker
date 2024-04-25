@@ -29,7 +29,7 @@ final class ImageLikerUITests: XCTestCase {
             XCTAssertTrue(webView.waitForExistence(timeout: 5))
         
             loginTextField.tap()
-            loginTextField.typeText("<Your_email>")
+            loginTextField.typeText("vvinageras@gmail.com")
             loginTextField.swipeUp()
             
             
@@ -37,7 +37,7 @@ final class ImageLikerUITests: XCTestCase {
             XCTAssertTrue(passwordTextField.waitForExistence(timeout: 3))
             
             passwordTextField.tap()
-            passwordTextField.typeText("<Your_password>")
+            passwordTextField.typeText("1q2w3e4r")
             webView.swipeUp()
             
             let webViewsQuery = app.webViews
@@ -83,8 +83,8 @@ final class ImageLikerUITests: XCTestCase {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 1).tap()
         
-        XCTAssertTrue(app.staticTexts["<@Your_username>"].exists)
-        XCTAssertTrue(app.staticTexts["<Your_Bio> || <Your Name>"].exists)
+        XCTAssertTrue(app.staticTexts["@vvinakheras"].exists)
+        XCTAssertTrue(app.staticTexts["Still looking for magic 🤪🤪"].exists)
         
         app.buttons["logOutButton"].tap()
         app.alerts["Пока,пока!"].scrollViews.otherElements.buttons["Да"].tap()

@@ -26,7 +26,7 @@ enum Constants {
     
     static let forHTTPHeaderField = "Authorization"
     
-    static let photos_per_page = "10"
+    static let photos_per_page = "2"
     
     static let likePath = "/like"
     

@@ -110,6 +110,7 @@ extension ImagesListService {
         let isTestingMode = ProcessInfo().arguments.contains("testMode")
         if (isTestingMode) && lastLoadedPage > 1{
             self.lastLoadedPage += 1
+            print("⛔️⛔️⛔️⛔️⛔️ STOP FETCHING! WE ARE JUST TESTING")
         }else{
             fetchPhotoNextPage(with: authorizationToken) { result  in
                 switch result {
