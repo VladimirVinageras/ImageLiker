@@ -26,6 +26,7 @@ final class ProfileImageService{
     private var bearerTokenRequest: (String) -> String = { input in
         return "Bearer \(input)"
     }
+    private var isFetchingProfileImageURLTasksRunning = false
     
     func createProfileImageURLRequest(with username : String, using authorizationToken: String) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
@@ -47,6 +48,13 @@ final class ProfileImageService{
     
     func fetchProfileImageURL(with username: String, using authorizationToken: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingProfileImageURLTasksRunning {
+                return
+            }
+        }
+        isFetchingProfileImageURLTasksRunning = true
+
         task?.cancel()
         
         guard let profileImageURLRequest = createProfileImageURLRequest(with: username, using: authorizationToken) else {
@@ -68,10 +76,12 @@ final class ProfileImageService{
                             name: ProfileImageService.didChangeNotification,
                             object: self,
                             userInfo: ["URL": profileImageURL])
+                    self.isFetchingProfileImageURLTasksRunning = false
                 }
             case .failure(let error):
                 print("❌❌❌❌[ProfileImageServiceError.objectTask]: ProfileImageServiceError - Request ERROR \(error)")
                 completion(.failure(error))
+                self.isFetchingProfileImageURLTasksRunning = false
             }
             self.task = nil
         }

@@ -19,14 +19,14 @@ final class ImageLikerUITests: XCTestCase {
     
     //IMPORTANT: - Before running testAuth(), erase All content and Settings in your Simulator (Simulator -> Device -> Erase All Content and Settings...)
     func testAuth() throws {
-      
+
             app.buttons["Authenticate"].tap()
             let webView = app.webViews["UnsplashWebView"]
-            XCTAssertTrue(webView.waitForExistence(timeout: 5))
+            XCTAssertTrue(webView.waitForExistence(timeout: 3))
             
             
             let loginTextField = webView.descendants(matching: .textField).element
-            XCTAssertTrue(webView.waitForExistence(timeout: 5))
+            XCTAssertTrue(webView.waitForExistence(timeout: 3))
         
             loginTextField.tap()
             loginTextField.typeText("vvinageras@gmail.com")
@@ -34,7 +34,7 @@ final class ImageLikerUITests: XCTestCase {
             
             
             let passwordTextField = webView.descendants(matching: .secureTextField).element
-            XCTAssertTrue(passwordTextField.waitForExistence(timeout: 3))
+            XCTAssertTrue(passwordTextField.waitForExistence(timeout: 1))
             
             passwordTextField.tap()
             passwordTextField.typeText("1q2w3e4r")
@@ -44,10 +44,11 @@ final class ImageLikerUITests: XCTestCase {
             webViewsQuery.buttons["Login"].tap()
             sleep(2)
             
+        
             let tablesQuery = app.tables
             let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
             
-            XCTAssertTrue(cell.waitForExistence(timeout: 5))
+            XCTAssertTrue(cell.waitForExistence(timeout: 3))
 
     }
     
@@ -55,17 +56,17 @@ final class ImageLikerUITests: XCTestCase {
        //  тестируем сценарий ленты
         let tablesQuery = app.tables
         let cell = tablesQuery.descendants(matching: .cell).element(boundBy: 0)
-       XCTAssertTrue(cell.waitForExistence(timeout: 5))
+      sleep(3)
         cell.swipeUp()
-        XCTAssertTrue(cell.waitForExistence(timeout: 2))
+       sleep(2)
         
         let cellToLike = tablesQuery.descendants(matching: .cell).element(boundBy: 1)
         
         cellToLike.buttons["likeButton"].tap()
-        XCTAssertTrue(cellToLike.waitForExistence(timeout: 3))
+       sleep(3)
         
         cellToLike.buttons["likeButton"].tap()
-        XCTAssertTrue(cellToLike.waitForExistence(timeout: 3))
+        sleep(3)
         
         cellToLike.tap()
         sleep(3)
@@ -90,7 +91,7 @@ final class ImageLikerUITests: XCTestCase {
         app.alerts["Пока,пока!"].scrollViews.otherElements.buttons["Да"].tap()
         
         let button = app.buttons["Authenticate"]
-        XCTAssertTrue(button.waitForExistence(timeout: 3))
+        XCTAssertTrue(button.waitForExistence(timeout: 1))
         
     
         

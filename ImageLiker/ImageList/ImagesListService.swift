@@ -27,6 +27,8 @@ final class ImagesListService {
         return "Bearer \(input)"
     }
     private var lastLoadedPage = 0
+    private var isFetchingPhotosTasksRunning = false
+    private var isFetchingLikeStateTasksRunning = false
     
     private func createImageListURLRequest(with authorizationToken: String, next_page : Int) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL,
@@ -55,9 +57,13 @@ final class ImagesListService {
     }
     
     func fetchPhotoNextPage(with autorizationToken: String, _ completion: @escaping (Result<[Photo], Error>) -> Void){
-        
         let nextPage = lastLoadedPage + 1
-        
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingPhotosTasksRunning {
+                return
+            }
+        }
+        isFetchingPhotosTasksRunning = true
         task?.cancel()
         
         guard let ImageListURLRequest = createImageListURLRequest(with: autorizationToken, next_page: nextPage) else {
@@ -81,7 +87,6 @@ final class ImagesListService {
                     
                     let photo = Photo(id: id, created_at: createdAt, width: width,height: height, liked_by_user: isLikedString, description: description, urls: item.urls)
                     
-                    
                     photosList.append(photo)
                     print("❇️❇️❇️❇️❇️❇️ \(String(describing: photo.largeImageURL))")
                 }
@@ -92,11 +97,14 @@ final class ImagesListService {
                         name: ImagesListService.didChangeNotification,
                         object: self,
                         userInfo: ["URL": self.photos])
+                self.isFetchingPhotosTasksRunning = false
             case .failure(let error):
                 print("❌❌❌❌[ImageListServiceError.objectTask]: ImageListServiceError - Request ERROR \(error)")
                 completion(.failure(error))
+                self.isFetchingPhotosTasksRunning = false
             }
             self.task = nil
+            
         }
         task.resume()
         
@@ -132,6 +140,14 @@ extension ImagesListService {
     
     func toggleLikeState( photoId: String, isPhotoLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void){
         assert(Thread.isMainThread)
+        
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingLikeStateTasksRunning {
+                return
+            }
+        }
+        isFetchingLikeStateTasksRunning = true
+        
         task?.cancel()
         
         guard let token = storage.token else {return}
@@ -157,8 +173,10 @@ extension ImagesListService {
                 }
                 print("The new photo state is: \(String(describing: isPhotoLiked))")
                 completion(.success(()))
+                isFetchingLikeStateTasksRunning = false
             case .failure(let error):
                 completion(.failure(error))
+                isFetchingLikeStateTasksRunning = false
             }
         }
         self.task = task

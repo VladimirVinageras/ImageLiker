@@ -18,6 +18,7 @@ final class OAuth2Service {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private var lastCode: String?
+    private var isFetchingOAuthTokenTasksRunning = false
     
     private init() {}
     
@@ -58,6 +59,13 @@ final class OAuth2Service {
             completion(.failure(AuthServiceError.invalidRequest))
             return
         }
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingOAuthTokenTasksRunning {
+                return
+            }
+        }
+        isFetchingOAuthTokenTasksRunning = true
+        
         task?.cancel()
         lastCode = code
         
@@ -82,9 +90,11 @@ final class OAuth2Service {
                 
                 guard let accessToken = data.accessToken else {return}
                 completion(.success(accessToken))
+                self.isFetchingOAuthTokenTasksRunning = false
             case .failure(let error):
                 print("❌❌❌❌[OAuth2Service.objectTask]: Request ERROR \(error)")
                 completion(.failure(error))
+                self.isFetchingOAuthTokenTasksRunning = false
             }
             self.task = nil
             self.lastCode = nil

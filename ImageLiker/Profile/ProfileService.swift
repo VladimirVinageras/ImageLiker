@@ -23,6 +23,7 @@ final class ProfileService{
     private var bearerTokenRequest: (String) -> String = { input in
         return "Bearer \(input)"
     }
+    private var isFetchingProfileTasksRunning = false
     
     private func createProfileRequest(authorizationToken: String) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
@@ -42,6 +43,12 @@ final class ProfileService{
     }
     
     func fetchProfile(using authorizationToken: String, completion: @escaping (Result<Profile, Error>) -> Void){
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingProfileTasksRunning {
+                return
+            }
+        }
+        isFetchingProfileTasksRunning = true
         task?.cancel()
         
         guard let profileRequest = createProfileRequest(authorizationToken: authorizationToken) else {
@@ -56,9 +63,11 @@ final class ProfileService{
                 let profileData = Profile(username: profileResult.username, first_name: profileResult.first_name, last_name: profileResult.last_name, bio: profileResult.bio, id: profileResult.id)
                 self.profileData = profileData
                 completion(.success(profileData))
+                self.isFetchingProfileTasksRunning = false
             case .failure(let error):
                 print("❌❌❌❌[ProfileServiceError.objectTask]: ProfileServiceError - Request ERROR \(error)")
                 completion(.failure(error))
+                self.isFetchingProfileTasksRunning = false
             }
             self.task = nil
         }
