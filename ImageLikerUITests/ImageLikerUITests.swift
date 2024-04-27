@@ -34,7 +34,7 @@ final class ImageLikerUITests: XCTestCase {
             
             
             let passwordTextField = webView.descendants(matching: .secureTextField).element
-            XCTAssertTrue(passwordTextField.waitForExistence(timeout: 1))
+            XCTAssertTrue(passwordTextField.waitForExistence(timeout: 3))
             
             passwordTextField.tap()
             passwordTextField.typeText("1q2w3e4r")
@@ -42,7 +42,7 @@ final class ImageLikerUITests: XCTestCase {
             
             let webViewsQuery = app.webViews
             webViewsQuery.buttons["Login"].tap()
-            sleep(2)
+            sleep(3)
             
         
             let tablesQuery = app.tables
@@ -91,7 +91,7 @@ final class ImageLikerUITests: XCTestCase {
         app.alerts["Пока,пока!"].scrollViews.otherElements.buttons["Да"].tap()
         
         let button = app.buttons["Authenticate"]
-        XCTAssertTrue(button.waitForExistence(timeout: 1))
+        XCTAssertTrue(button.waitForExistence(timeout: 3))
         
     
         
