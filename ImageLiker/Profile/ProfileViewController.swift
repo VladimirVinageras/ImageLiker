@@ -185,7 +185,7 @@ private func updateProfileData(){
     }
     
     func updatingProfileData() -> [String] {
-        guard var profileData = presenter?.updateProfileData() else {return []}
+        guard var profileData = presenter?.updateProfileData() else {return ["","",""]}
         return profileData
     }
 }

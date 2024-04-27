@@ -147,13 +147,13 @@ extension ImagesListService {
             }
         }
         isFetchingLikeStateTasksRunning = true
-        
         task?.cancel()
         
         guard let token = storage.token else {return}
         var toggleLikeStateRequest : URLRequest?
-        
-        toggleLikeStateRequest = createLikeRequest(token, for: photoId, when: isPhotoLiked)
+        var isPhotoLikedToggled = isPhotoLiked
+        isPhotoLikedToggled.toggle()
+        toggleLikeStateRequest = createLikeRequest(token, for: photoId, when: isPhotoLikedToggled)
         
         guard let toggleLikeStateRequest = toggleLikeStateRequest else {return}
         
