@@ -38,6 +38,7 @@ final class SplashViewController : UIViewController {
     private func createSplashView(){
         
         imageView.image = UIImage(named: "Vector")
+        imageView.image?.accessibilityIdentifier = "UnsplashViewImage"
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         

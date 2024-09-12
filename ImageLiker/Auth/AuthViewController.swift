@@ -30,7 +30,13 @@ final class AuthViewController : UIViewController{
         if segue.identifier == segueShowWebViewIdentifier {
             guard
                 let webViewViewController = segue.destination as? WebViewViewController
-            else { fatalError("Failed to prepare for \(segueShowWebViewIdentifier)") }
+            else { fatalError("Failed to prepare for \(segueShowWebViewIdentifier)")
+            }
+          let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
+            
             webViewViewController.delegate = self
             webViewViewController.modalPresentationStyle = .fullScreen
         } else {
@@ -60,7 +66,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
             case .success(let token):
                 viewController.storage.token = token
                 viewController.delegate?.didAuthenticate(viewController)
-               
                 print("✅✅✅✅✅✅✅Received token: ", token)
                 
             case .failure(let error):

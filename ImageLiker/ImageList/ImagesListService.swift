@@ -27,8 +27,8 @@ final class ImagesListService {
         return "Bearer \(input)"
     }
     private var lastLoadedPage = 0
-    
-    
+    private var isFetchingPhotosTasksRunning = false
+    private var isFetchingLikeStateTasksRunning = false
     
     private func createImageListURLRequest(with authorizationToken: String, next_page : Int) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL,
@@ -57,9 +57,13 @@ final class ImagesListService {
     }
     
     func fetchPhotoNextPage(with autorizationToken: String, _ completion: @escaping (Result<[Photo], Error>) -> Void){
-        
         let nextPage = lastLoadedPage + 1
-        
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingPhotosTasksRunning {
+                return
+            }
+        }
+        isFetchingPhotosTasksRunning = true
         task?.cancel()
         
         guard let ImageListURLRequest = createImageListURLRequest(with: autorizationToken, next_page: nextPage) else {
@@ -83,7 +87,6 @@ final class ImagesListService {
                     
                     let photo = Photo(id: id, created_at: createdAt, width: width,height: height, liked_by_user: isLikedString, description: description, urls: item.urls)
                     
-                    
                     photosList.append(photo)
                     print("❇️❇️❇️❇️❇️❇️ \(String(describing: photo.largeImageURL))")
                 }
@@ -94,11 +97,14 @@ final class ImagesListService {
                         name: ImagesListService.didChangeNotification,
                         object: self,
                         userInfo: ["URL": self.photos])
+                self.isFetchingPhotosTasksRunning = false
             case .failure(let error):
                 print("❌❌❌❌[ImageListServiceError.objectTask]: ImageListServiceError - Request ERROR \(error)")
                 completion(.failure(error))
+                self.isFetchingPhotosTasksRunning = false
             }
             self.task = nil
+            
         }
         task.resume()
         
@@ -109,15 +115,20 @@ final class ImagesListService {
 extension ImagesListService {
     func fetchPhotosNextPage() {
         guard let authorizationToken = storage.token else {return}
-        
-        fetchPhotoNextPage(with: authorizationToken) { result  in
-            switch result {
-            case .success(let photos):
-                self.lastLoadedPage += 1
-                print("❇️❇️❇️❇️Fetched photos successfully:", photos)
-            case .failure(let error):
-                
-                print("❌❌❌❌Failed to fetch photos:", error)
+        let isTestingMode = ProcessInfo().arguments.contains("testMode")
+        if (isTestingMode) && lastLoadedPage > 1{
+            self.lastLoadedPage += 1
+            print("⛔️⛔️⛔️⛔️⛔️ STOP FETCHING! WE ARE JUST TESTING")
+        }else{
+            fetchPhotoNextPage(with: authorizationToken) { result  in
+                switch result {
+                case .success(let photos):
+                    self.lastLoadedPage += 1
+                    print("❇️❇️❇️❇️Fetched photos successfully:", photos)
+                case .failure(let error):
+                    
+                    print("❌❌❌❌Failed to fetch photos:", error)
+                }
             }
         }
     }
@@ -129,20 +140,22 @@ extension ImagesListService {
     
     func toggleLikeState( photoId: String, isPhotoLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void){
         assert(Thread.isMainThread)
+        
+        if (ProcessInfo().arguments.contains("testMode")){
+            if isFetchingLikeStateTasksRunning {
+                return
+            }
+        }
+        isFetchingLikeStateTasksRunning = true
         task?.cancel()
         
         guard let token = storage.token else {return}
         var toggleLikeStateRequest : URLRequest?
+        var isPhotoLikedToggled = isPhotoLiked
+        isPhotoLikedToggled.toggle()
+        toggleLikeStateRequest = createLikeRequest(token, for: photoId, when: isPhotoLikedToggled)
         
-        
-        if isPhotoLiked  {
-            toggleLikeStateRequest = createDeleteLikeRequest(token, photoId: photoId)
-        } else {
-            toggleLikeStateRequest = createPostLikeRequest(token, photoId: photoId)
-        }
-        
-        guard let toggleLikeStateRequest = toggleLikeStateRequest
-        else {return}
+        guard let toggleLikeStateRequest = toggleLikeStateRequest else {return}
         
         
         let task = URLSession.shared.objectTask(for: toggleLikeStateRequest) { [weak self] (result: Result<PhotoLikeResult, Error>) in
@@ -160,8 +173,10 @@ extension ImagesListService {
                 }
                 print("The new photo state is: \(String(describing: isPhotoLiked))")
                 completion(.success(()))
+                isFetchingLikeStateTasksRunning = false
             case .failure(let error):
                 completion(.failure(error))
+                isFetchingLikeStateTasksRunning = false
             }
         }
         self.task = task
@@ -177,7 +192,7 @@ extension ImagesListService {
     
     
     //MARK: - CREATING REQUESTS
-    private func createPostLikeRequest(_ authorizationToken: String, photoId: String) -> URLRequest? {
+    private func createLikeRequest(_ authorizationToken: String, for photoId: String, when isLiked: Bool) -> URLRequest? {
         guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
             assertionFailure("Failed to create URL")
             return nil
@@ -190,28 +205,10 @@ extension ImagesListService {
         }
         var postLikeRequest = URLRequest(url: url)
         postLikeRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
-        postLikeRequest.httpMethod = "POST"
+        postLikeRequest.httpMethod = isLiked ? "POST" : "DELETE"
         
         return postLikeRequest
         
-    }
-    
-    private func createDeleteLikeRequest(_ authorizationToken: String, photoId: String) -> URLRequest? {
-        guard let defaultBaseURL = Constants.defaultBaseURL?.description else {
-            assertionFailure("Failed to create URL")
-            return nil
-        }
-        let slash = "/"
-        let urlRequestString = defaultBaseURL + Constants.photosPath + slash + photoId + Constants.likePath
-        
-        guard let url = URL(string: urlRequestString) else {
-            assertionFailure("Failed to create URL")
-            return nil
-        }
-        var deleteLikeRequest = URLRequest(url: url)
-        deleteLikeRequest.setValue(bearerTokenRequest(authorizationToken), forHTTPHeaderField: Constants.forHTTPHeaderField)
-        deleteLikeRequest.httpMethod = "DELETE"
-        return deleteLikeRequest
     }
 }
 
